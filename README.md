@@ -2,14 +2,17 @@
 > Create a hospital management system.
 ## Class Hierarchies
 * Hospital -> main class; contains most things
-* Staff
+* *Staff*
 	* F name: String
+	* F id: String
 	* F salary: double
 	* SC Doctors
 	* SC Nurses
 	* SC Janitors
 	* SC Administrators
 * Patients
+	* F name: String
+	* F id: String
 	* F sector: Department
 	* F symptoms: Symptom[]
 	* F record: MedicalHistory
@@ -22,8 +25,14 @@
 	* F name: String
 	* F sectors: Sector[]
 	* F cost: double
-* Symptom
+	* SC JanitoralEquipment
+	* SC AdminEquipment
+	* SC MedicalEquipment
+* *Symptom*
 	* F symptoms: Symptom[]
+	* SC MildSymptom
+	* SC ModerateSymptom
+	* SC SevereSymptom
 * MedicalHistory
 	* F path: String
 	* M addRecord
