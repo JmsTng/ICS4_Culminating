@@ -1,0 +1,21 @@
+Stage 1:  Proposal & Analysis:
+Your team will submit a proposal that describe in detailthe specific database system you plan to create.  
+Your proposal should include the following:
+
+1A. Problem Descriptionand Solution
+State the problem that your software will solve and briefly describe your proposed solution.
+
+1B. Functionality and Criteria of Success
+Describe the application that is planned to be created.  Clearly state the objectives / goalsby listing all functionalities and output of your final product.  For example, the functionalities for a bank’s client transaction software may be:
+•store personal client info•store history of account transactions•store current balance
+•search for client information
+•sort client information
+•calculate number of NSF checks
+•calculate average balance
+•display client info
+•report clients with balances over x amount of dollars
+
+1C. Solution Mastery Aspects
+You must choose a project that makes use of the all the programming conceptsand complexity requirements listed above.  
+For each of the programming concepts, indicate where your proposed system would make use of that concept.
+Describe how the structure of your software will satisfy the complexity requirements(the different class hierarchies and how theyare connected)
