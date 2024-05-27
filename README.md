@@ -6,20 +6,24 @@
 	* F name: String
 	* F id: String
 	* F salary: double
-	* SC Doctors
-	* SC Nurses
-	* SC Janitors
-	* SC Administrators
-* Patients
+	* SC Doctor
+		* F patients: Patient[]
+	* SC Nurse
+		* F patients: Patient[]
+	* SC Janitor
+	* SC Administrator
+* Patient
 	* F name: String
 	* F id: String
 	* F sector: Department
 	* F symptoms: Symptom[]
 	* F record: MedicalHistory
+	* F deceased: boolean
 	* M bill
 * Department
 	* F equipment: Equipment[]
-	* SC Wing
+	* F doctors: Doctor[]
+	* SC <Wing Name>
 		* F name: String
 * Equipment
 	* F name: String
