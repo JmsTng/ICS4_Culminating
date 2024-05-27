@@ -12,6 +12,7 @@
 * Patients
 	* F sector: Department
 	* F symptoms: Symptom[]
+	* F record: MedicalHistory
 	* M bill
 * Department
 	* F equipment: Equipment[]
@@ -23,3 +24,9 @@
 	* F cost: double
 * Symptom
 	* F symptoms: Symptom[]
+* MedicalHistory
+	* F path: String
+	* M addRecord
+	* M deleteRecord
+	* M printRecord
+	* M saveRecord
