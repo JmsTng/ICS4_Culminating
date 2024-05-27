@@ -1,5 +1,5 @@
 # ICS4_Culminating
-| Create a hospital management system.
+> Create a hospital management system.
 ## Class Hierarchies
 * Hospital -> main class; contains most things
 * Staff
