@@ -10,17 +10,17 @@
 		* F patients: Patient[]
 	* SC Nurse
 		* F patients: Patient[]
-	* SC Janitor
+	* SC Maintenance
 	* SC Administrator
 * Patient
 	* F name: String
 	* F id: String
-	* F sector: Department
+	* F sector: Ward
 	* F symptoms: Symptom[]
 	* F record: MedicalHistory
 	* F deceased: boolean
 	* M bill
-* Department
+* Ward
 	* F equipment: Equipment[]
 	* F doctors: Doctor[]
 	* SC <Wing Name>
@@ -29,7 +29,7 @@
 	* F name: String
 	* F sectors: Sector[]
 	* F cost: double
-	* SC JanitoralEquipment
+	* SC MaintenanceEquipment
 	* SC AdminEquipment
 	* SC MedicalEquipment
 * *Symptom*
