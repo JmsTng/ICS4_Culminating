@@ -22,3 +22,4 @@ This application is meant to be used by administrative staff only.
 * search patients by name, id, ward
 * search staff by name, id, role, ward
 * search equipment by type, ward
+* deduct all salaries and equipment costs, add all patient bills from hospital budget to check for yearly profit
