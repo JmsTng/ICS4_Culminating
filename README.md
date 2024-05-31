@@ -15,7 +15,7 @@
 * Patient
 	* F name: String
 	* F id: String
-	* F sector: Ward
+	* F ward: Ward
 	* F symptoms: Symptom[]
 	* F record: MedicalHistory
 	* F deceased: boolean
@@ -27,7 +27,7 @@
 		* F name: String
 * Equipment
 	* F name: String
-	* F sectors: Sector[]
+	* F ward: Ward[]
 	* F cost: double
 	* SC MaintenanceEquipment
 	* SC AdminEquipment
