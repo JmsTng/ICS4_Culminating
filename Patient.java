@@ -16,6 +16,23 @@ public class Patient {
         idCount++;
         symptoms = new ArrayList<Symptom>();
     }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
     
     public boolean addSymptom(int severity, String name, String description) {
         switch (severity) {
