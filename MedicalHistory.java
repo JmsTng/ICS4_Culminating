@@ -5,6 +5,11 @@
  * DESCRIPTION:
  */
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class MedicalHistory {
     private final String dir = "/medical-histories/";
 
@@ -19,5 +24,9 @@ public class MedicalHistory {
     }
 
 
-    public void saveRecord(String date)
+    public void saveRecord(String date) {
+        try (BufferedWriter fw = new BufferedWriter(new FileWriter(this.dir + this.path, true));) {
+
+        } catch (IOException e) {}
+    }
 }
