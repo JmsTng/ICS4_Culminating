@@ -25,8 +25,14 @@ public class MedicalHistory {
 
 
     public void saveRecord(String date) {
-        try (BufferedWriter fw = new BufferedWriter(new FileWriter(this.dir + this.path, true));) {
+        String ward;
 
+        try (BufferedWriter fw = new BufferedWriter(new FileWriter(this.dir + this.path, true));) {
+            fw.write(date + "\n");
+
+            switch (this.patient.getWard().getClass()) {
+                case Ward.class -> ward = "General";
+            }
         } catch (IOException e) {}
     }
 }
