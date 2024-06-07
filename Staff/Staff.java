@@ -1,4 +1,5 @@
 package Staff;
+import java.util.*;
 
 public abstract class Staff {
 
@@ -60,7 +61,7 @@ public abstract class Staff {
     }
 
     /*CONSTRUCTOR*/
-    public Staff (String name, String employeeNum, double salary, double overtimeSalary) {
+    public Staff(String name, String employeeNum, double salary, double overtimeSalary) {
         this.name = name;
         this.employeeNum = employeeNum;
         this.salary = salary;
@@ -78,9 +79,17 @@ public abstract class Staff {
 
 }
 
-public class Maintenance extends Staff {
-    public Maintenance (String name, String num, double sal, double overTimeSal) {
+
+
+class Admin extends Staff {
+
+    private String userName;
+    private String password;
+
+    public Admin(String name, String num, double sal, double overTimeSal, String password) {
         super(name, num, sal, overTimeSal);
+        userName = getEmployeeNum();
+        this.password = password;
     }
 
     public boolean enterHours(double hours) {
@@ -97,5 +106,16 @@ public class Maintenance extends Staff {
 
     public double getMonthlySalary() {
         return (this.getSalary() * this.getHoursWorked()) + (this.getOvertimeSalary() * this.getOvertimeWorked());
+    }
+
+    public boolean login() {
+        Scanner sc = new Scanner(System.in);
+        String user, pass;
+        System.out.print("UserName: ");
+        user = sc.nextLine();
+        System.out.print("Password: ");
+        pass = sc.nextLine();
+
+        return user.equals(userName) && pass.equals(password);
     }
 }
