@@ -1,3 +1,5 @@
+import Staff.*;
+
 public class Hospital {
     public final int MAX_WARDS;
     public final int PATIENT_CAP;
