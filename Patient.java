@@ -37,6 +37,14 @@ public class Patient {
     public void setId(String id) {
         this.id = id;
     }
+
+    public Ward getWard() {
+        return ward;
+    }
+
+    public void setWard(Ward ward) {
+        this.ward = ward;
+    }
     
     public boolean addSymptom(int severity, String name, String description) {
         switch (severity) {
