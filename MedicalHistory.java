@@ -1,11 +1,3 @@
-/*
- * TITLE: MedicalHistory
- * NAME: James Tung
- * DATE: 06/05/2024
- * DESCRIPTION:
- */
-
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -25,8 +17,13 @@ public class MedicalHistory {
 
 
     public void saveRecord(String date) {
-        try (BufferedWriter fw = new BufferedWriter(new FileWriter(this.dir + this.path, true));) {
+        Ward ward = this.patient.getWard();
 
+        try (BufferedWriter fw = new BufferedWriter(new FileWriter(this.dir + this.path, true));) {
+            fw.write(date + "\n");
+
+            if (ward instanceof Emergency) { fw.write("Emergency"); }
+            else if (ward instanceof Oncology) { fw.write("Oncology"); }
         } catch (IOException e) {}
     }
 }
