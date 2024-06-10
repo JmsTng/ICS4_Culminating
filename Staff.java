@@ -1,4 +1,3 @@
-package Staff;
 import java.util.*;
 
 public abstract class Staff {
