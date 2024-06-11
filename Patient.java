@@ -9,9 +9,9 @@ public class Patient {
     private String name;
     private String id;
     private ArrayList<Symptom> symptoms;
-    private Ward ward;
     private ArrayList<Medical> medicalPersonnel;
-    
+    private Ward ward;
+
     
     public Patient(String name) {
         this.name = name;
@@ -38,6 +38,14 @@ public class Patient {
         this.id = id;
     }
 
+    public ArrayList<Medical> getMedicalPersonnel() {
+        return medicalPersonnel;
+    }
+
+    public ArrayList<Symptom> getSymptoms() {
+        return symptoms;
+    }
+
     public Ward getWard() {
         return ward;
     }
@@ -45,7 +53,8 @@ public class Patient {
     public void setWard(Ward ward) {
         this.ward = ward;
     }
-    
+
+
     public boolean addSymptom(int severity, String name, String description) {
         switch (severity) {
             case 0 -> { symptoms.add(new Mild(name, description)); }
@@ -58,5 +67,9 @@ public class Patient {
         }
 
         return true;
+    }
+
+    public boolean removeSymptom(String name) {
+
     }
 }

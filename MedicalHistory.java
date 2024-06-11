@@ -1,6 +1,7 @@
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class MedicalHistory {
     private final String dir = "/medical-histories/";
@@ -18,12 +19,19 @@ public class MedicalHistory {
 
     public void saveRecord(String date) {
         Ward ward = this.patient.getWard();
+        ArrayList<Symptom> symptoms = this.patient.getSymptoms();
 
         try (BufferedWriter fw = new BufferedWriter(new FileWriter(this.dir + this.path, true));) {
             fw.write(date + "\n");
 
+            // TODO: Needs fixing
             if (ward instanceof Emergency) { fw.write("Emergency"); }
+            else if (ward instanceof ICU) { fw.write("ICU"); }
             else if (ward instanceof Oncology) { fw.write("Oncology"); }
+            else if (ward instanceof Paedology) { fw.write("Paedology"); }
+            else if (ward instanceof Ward) { fw.write("General"); }
+
+            fw.write("%d".formatted(symptoms.size()));
         } catch (IOException e) {}
     }
 }
