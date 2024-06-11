@@ -65,6 +65,29 @@ public class Medical extends Staff {
             return false;
         }
     }
+
+    public boolean useEquipment(String name, int quant) {
+        Equipment e = ward.getEquipment(name);
+        if (e == null) return false;
+
+        if ((e.getInUse() + quant) <= e.getQuantity()) {
+            e.setInUse(e.getInUse()+quant);
+            return true;
+        }
+        else return false;
+    }
+
+    public String toString() {
+        super.toString() + "\nWard: " + ward.get
+    }
+
+    private String _getWardName() {
+        String toReturn;
+        if (ward instanceof Oncology) toReturn = "Oncology";
+        else if (ward instanceof ICU) toReturn = "ICU";
+        else if (ward instanceof Paedology) toReturn = "Paedology";
+        else if
+    }
 }
 
 class Doctor extends Medical {

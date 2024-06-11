@@ -76,6 +76,10 @@ public abstract class Staff {
 
     public abstract double getMonthlySalary();
 
+    public String toString() {
+        return String.format("Name: %s\nEmployee Number: %s\nSalary: %2.2f\nHours Worked: %.2f\nOvertime Salary: %2.2f\nOvertime Hours Worked: %.2f", name, employeeNum, salary, hoursWorked, overtimeSalary, overtimeWorked);
+    }
+
 }
 
 
@@ -84,6 +88,23 @@ class Admin extends Staff {
 
     private String userName;
     private String password;
+
+    public String getUsername() {
+        return userName;
+    }
+
+    public void setUsername(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
 
     public Admin(String name, String num, double sal, double overTimeSal, String password) {
         super(name, num, sal, overTimeSal);
@@ -117,4 +138,5 @@ class Admin extends Staff {
 
         return user.equals(userName) && pass.equals(password);
     }
+
 }
