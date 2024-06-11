@@ -27,6 +27,10 @@ class Mild extends Symptom {
     private int symptomPoints = SYMPTOM_BASE_POINTS;
 
 
+    public Mild(String name) {
+        super(name);
+    }
+
     public Mild(String name, String description) {
         super(name, description);
     }
@@ -35,6 +39,7 @@ class Mild extends Symptom {
         super(name, description);
         this.symptomPoints = points;
     }
+
 
     public int getSymptomPoints() {
         return symptomPoints;
@@ -47,6 +52,10 @@ class Moderate extends Symptom {
     private int symptomPoints = SYMPTOM_BASE_POINTS;
 
 
+    public Moderate(String name) {
+        super(name);
+    }
+
     public Moderate(String name, String description) {
         super(name, description);
     }
@@ -55,6 +64,7 @@ class Moderate extends Symptom {
         super(name, description);
         this.symptomPoints = points;
     }
+
 
     public int getSymptomPoints() {
         return symptomPoints;
@@ -67,6 +77,10 @@ class Severe extends Symptom {
     private int symptomPoints = SYMPTOM_BASE_POINTS;
 
 
+    public Severe(String name) {
+        super(name);
+    }
+
     public Severe(String name, String description) {
         super(name, description);
     }
@@ -75,6 +89,7 @@ class Severe extends Symptom {
         super(name, description);
         this.symptomPoints = points;
     }
+
 
     public int getSymptomPoints() {
         return symptomPoints;
