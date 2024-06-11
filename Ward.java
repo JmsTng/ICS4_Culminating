@@ -24,6 +24,7 @@ public class Ward{
    
    public double getOperatingCost(){
       return this.baseOperatingCost;
+      //ADD EQUIPMENT COSTS IN
    }
    
    public boolean addPatient(Patient p){
@@ -31,8 +32,10 @@ public class Ward{
          patientList.add(p);
          numPatient++;
          return true;
+         //true if capacity
       }
       return false;
+      //false if full
    }
    
    public boolean removePatient(String id){
@@ -41,17 +44,34 @@ public class Ward{
             patientList.remove(i);
             numPatient--;
             return true;
+            //return true if id matches an object
          }
       }
       return false;
+      //return false if no matching id found
    }
    
    public boolean addEquipment(Equipment e, int num){
-   
+      for(int i = 0; i < numEquipment; i++){
+         if(equipmentList.get(i).getName() == e.getName()){
+            equipmentList.get(i).setQuantity(equipmentList.get(i).getQuantity + num);
+            return true;
+            //return true if equipment was added to existing object within array
+         } 
+      }
+      equipmentList.add(Equipment(this,e.getName(),num,e.getMaintainCost));
+      return false;
+      //return false if new equipment object was created
    }
    
    public boolean removeEquipment(Equipment e, int num){
-   
+      for(int i = 0; i < numEquipment; i++){
+         if(equipmentList.get(i).getName() == e.getName()){
+            
+            
+         } 
+      }
+      return false;
    }
    
    public boolean determineSuitability(Patient p){
