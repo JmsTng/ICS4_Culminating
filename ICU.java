@@ -1,25 +1,8 @@
 import java.util.ArrayList;
 
-public class Ward{
-   private ArrayList<Equipment> equipmentList = new ArrayList<Equipment>();
-   private static int maxEquipment = 150;
-   private int numEquipment;
-   private ArrayList<Patient> patientList = new ArrayList<Patient>();
-   private static int maxPatient = 100;
-   private int numPatient;
-   private ArrayList<Medical> medicalList = new ArrayList<Medical>();
-   private static int maxMedical = 15;
-   private int numMedical;
-   private double baseOperatingCost;
-   
-   public Ward(){
-      this.maxEquipment = maxEquipment;
-      this.numEquipment = 0;
-      this.maxPatient = maxPatient;
-      this.numPatient = 0;
-      this.maxMedical = maxMedical;
-      this.numMedical = 0;
-      this.baseOperatingCost = 1000000;
+public class ICU extends Ward {  
+   public ICU(){
+      super();
    }
    
    public double getOperatingCost(){
@@ -109,10 +92,6 @@ public class Ward{
    }
    
    public boolean determineSuitability(Patient p){
-   //if triage is less than 5, they are suitable for this ward
-      if(p.getTriage()<5){
-         return true;
-      }
-      return false;
+      //get symptomList from patient and check for at least 3 severe ones
    }
 }
