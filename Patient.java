@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-import Staff.Medical;
+import java.util.Objects;
 
 public class Patient {
     public final double BASE_COST = 0;
@@ -50,8 +50,19 @@ public class Patient {
         return ward;
     }
 
-    public void setWard(Ward ward) {
+    private boolean setWard(Ward ward) {
         this.ward = ward;
+        return true;
+    }
+
+    public int getTriage() {
+        int triage = 0;
+
+        for (Symptom s : symptoms) {
+            triage += s.getTriage();
+        }
+
+        return triage;
     }
 
 
@@ -95,10 +106,40 @@ public class Patient {
     }
 
     public boolean assignWard(Ward ward) {
-        return ward.addPatient(this);
+        return ward.addPatient(this) && setWard(ward);
     }
 
+    public double bill() {
+        double cost = BASE_COST;
+        for (Symptom s : symptoms) {
+            cost += s.getCost();
+        }
 
+        return cost;
+    }
+
+    public boolean matchName(String name) { // addition: for searching
+        if (name == null) return false;
+
+        for (int i = 0; i < name.length(); i++) {
+            if (this.name.charAt(i) != name.charAt(i)) return false;
+        }
+
+        return true;
+    }
+
+    public boolean matchId(String id) { // addition: for searching
+        return Objects.equals(this.id, id);
+    }
+
+    public int compareToName(Patient patient) { // addition: for sorting
+        // negative if string precedes
+        return this.name.compareToIgnoreCase(patient.getName());
+    }
+
+    public int compareToId(Patient patient) { // addition: for sorting
+        return this.id.compareToIgnoreCase(patient.getId());
+    }
 
 
     private int _searchSymptom(String name) {  // Added to assist in finding symptoms to delete

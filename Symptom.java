@@ -19,12 +19,17 @@ public abstract class Symptom {
     public String getDescription() {
         return description;
     }
+
+    public abstract double getCost();
+
+    public abstract int getTriage();
 }
 
 class Mild extends Symptom {
     private final int SYMPTOM_BASE_POINTS = 1;
+    private final double BASE_COST = 25;
 
-    private int symptomPoints = SYMPTOM_BASE_POINTS;
+    private double cost = BASE_COST;
 
 
     public Mild(String name) {
@@ -35,21 +40,26 @@ class Mild extends Symptom {
         super(name, description);
     }
 
-    public Mild(String name, String description, int points) {
+    public Mild(String name, String description, double cost) {
         super(name, description);
-        this.symptomPoints = points;
+        this.cost = cost;
     }
 
 
-    public int getSymptomPoints() {
-        return symptomPoints;
+    public double getCost() {
+        return cost;
+    }
+
+    public int getTriage() {
+        return SYMPTOM_BASE_POINTS;
     }
 }
 
 class Moderate extends Symptom {
     private final int SYMPTOM_BASE_POINTS = 3;
+    private final double BASE_COST = 25;
 
-    private int symptomPoints = SYMPTOM_BASE_POINTS;
+    private double cost = BASE_COST;
 
 
     public Moderate(String name) {
@@ -60,21 +70,26 @@ class Moderate extends Symptom {
         super(name, description);
     }
 
-    public Moderate(String name, String description, int points) {
+    public Moderate(String name, String description, double cost) {
         super(name, description);
-        this.symptomPoints = points;
+        this.cost = cost;
     }
 
 
-    public int getSymptomPoints() {
-        return symptomPoints;
+    public double getCost() {
+        return cost;
+    }
+
+    public int getTriage() {
+        return SYMPTOM_BASE_POINTS;
     }
 }
 
 class Severe extends Symptom {
     private final int SYMPTOM_BASE_POINTS = 5;
+    private final double BASE_COST = 25;
 
-    private int symptomPoints = SYMPTOM_BASE_POINTS;
+    private double cost = BASE_COST;
 
 
     public Severe(String name) {
@@ -85,13 +100,17 @@ class Severe extends Symptom {
         super(name, description);
     }
 
-    public Severe(String name, String description, int points) {
+    public Severe(String name, String description, double cost) {
         super(name, description);
-        this.symptomPoints = points;
+        this.cost = cost;
     }
 
 
-    public int getSymptomPoints() {
-        return symptomPoints;
+    public double getCost() {
+        return cost;
+    }
+
+    public int getTriage() {
+        return SYMPTOM_BASE_POINTS;
     }
 }

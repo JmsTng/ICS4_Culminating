@@ -94,9 +94,16 @@ public abstract class Staff {
         return true;
     }
 
-    public Staff compareName(Staff s) {
-        String otherName = s.getName();
+    public int compareName(Staff s) {
+        return this.name.compareToIgnoreCase(s.getName());
+    }
 
+    public int compareId(Staff s) {
+        return this.employeeNum.compareToIgnoreCase(s.getEmployeeNum());
+    }
+
+    public double compareSalary(Staff s) {
+        return this.salary - s.getSalary();
     }
 
     public String toString() {

@@ -87,6 +87,7 @@ public class Medical extends Staff {
         else if (ward instanceof ICU) toReturn = "ICU";
         else if (ward instanceof Paedology) toReturn = "Paedology";
         else if (ward instanceof Ememergency) toReturn = "Emergency";
+        else toReturn = "General";
     }
 }
 
