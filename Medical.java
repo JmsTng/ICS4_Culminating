@@ -58,7 +58,7 @@ public class Medical extends Staff {
     }
 
     public boolean setWard (Ward w) {
-        if (w.addStaff(this)) {
+        if (w.addMedical(this)) {
             ward = w;
             return true;
         } else {
@@ -78,7 +78,7 @@ public class Medical extends Staff {
     }
 
     public String toString() {
-        super.toString() + "\nWard: " + ward.get
+        return super.toString() + "\nWard: " + _getWardName() + "\nPatients: " + patientNum;
     }
 
     private String _getWardName() {
@@ -86,7 +86,8 @@ public class Medical extends Staff {
         if (ward instanceof Oncology) toReturn = "Oncology";
         else if (ward instanceof ICU) toReturn = "ICU";
         else if (ward instanceof Paedology) toReturn = "Paedology";
-        else if
+        else if (ward instanceof Ememergency) toReturn = "Emergency";
+        else toReturn = "General";
     }
 }
 
@@ -96,13 +97,23 @@ class Doctor extends Medical {
 
     public static int patientCap = 5;
 
+    public static double overTimeSalary = 0;
+
     public Doctor (String name, String employeeNum, double salary, double overtimeSalary, String speciality) {
         super (name, employeeNum, salary, overtimeSalary);
         this.speciality = speciality;
     }
 
+    public String getSpeciality() {
+        return speciality;
+    }
+
     public void setSpeciality(String s) {
         speciality = s;
+    }
+
+    public String toString() {
+        return super.toString() + "\nSpeciality: " + speciality;
     }
 
 }
