@@ -76,6 +76,29 @@ public abstract class Staff {
 
     public abstract double getMonthlySalary();
 
+    public boolean matchName(String name) {
+        if (name == null) return false;
+
+        for (int i = 0; i < name.length(); i++) {
+            if (this.name.charAt(i) != name.charAt(i)) return false;
+        }
+        return true;
+    }
+
+    public boolean matchEmployeeNum(String num) {
+        if (num == null || employeeNum.length() != num.length()) return false;
+
+        for (int i = 0; i < employeeNum.length(); i++) {
+            if(employeeNum.charAt(i) != num.charAt(i)) return false;
+        }
+        return true;
+    }
+
+    public Staff compareName(Staff s) {
+        String otherName = s.getName();
+
+    }
+
     public String toString() {
         return String.format("Name: %s\nEmployee Number: %s\nSalary: %2.2f\nHours Worked: %.2f\nOvertime Salary: %2.2f\nOvertime Hours Worked: %.2f", name, employeeNum, salary, hoursWorked, overtimeSalary, overtimeWorked);
     }
