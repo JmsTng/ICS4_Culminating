@@ -69,7 +69,43 @@ public class Patient {
         return true;
     }
 
-    public boolean removeSymptom(String name) {
+    public boolean addSymptom(int severity, String name) {
+        switch (severity) {
+            case 0 -> { symptoms.add(new Mild(name)); }
+            case 1 -> { symptoms.add(new Moderate(name)); }
+            case 2 -> { symptoms.add(new Severe(name)); }
+            default -> {
+                System.out.println("Invalid severity level.");
+                return false;
+            }
+        }
 
+        return true;
+    }
+
+    public boolean removeSymptom(String name) {
+        int i = _searchSymptom(name);
+
+        if (i != -1) {
+            symptoms.remove(i);
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean assignWard(Ward ward) {
+        return ward.addPatient(this);
+    }
+
+
+
+
+    private int _searchSymptom(String name) {  // Added to assist in finding symptoms to delete
+        for (int i = 0; i < symptoms.size(); i++) {
+            if (symptoms.get(i).getName().equals(name)) return i;
+        }
+
+        return -1;
     }
 }
