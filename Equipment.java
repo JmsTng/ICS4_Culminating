@@ -45,11 +45,24 @@ public class Equipment {
         this.wardHoused = wardHoused;
     }
 
-    public Equipment (Ward w, String title, int quant, double maintainCost) {
+    public Equipment(Ward w, String title, int quant, double maintainCost) {
         this.wardHoused = w;
         this.name = title;
         this.quantity = quant;
         this.maintenanceCost = maintainCost;
     }
 
+    public String toString() {
+        return String.format("Ward: %s%nEquipment Name: %s%n Quantity: %d%nIn Use: %d%nCost to Maintain: %.2f", _getWardName(), name, quantity, inUse, maintenanceCost);
+    }
+
+    private String _getWardName() {
+        String toReturn;
+        if (wardHoused instanceof Oncology) toReturn = "Oncology";
+        else if (wardHoused instanceof ICU) toReturn = "ICU";
+        else if (wardHoused instanceof Paedology) toReturn = "Paedology";
+        else if (wardHoused instanceof Ememergency) toReturn = "Emergency";
+        else toReturn = "General";
+        return toReturn;
+    }
 }
