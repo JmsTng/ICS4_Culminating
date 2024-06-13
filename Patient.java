@@ -1,8 +1,7 @@
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Patient {
-    public final double BASE_COST = 0;
+    public final double BASE_COST = 0;  //
     
     private static int idCount = 0;
     
