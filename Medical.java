@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.ArrayList; // Allows use of array lists
 
 public class Medical extends Staff {
 
@@ -33,8 +33,16 @@ public class Medical extends Staff {
         return (this.getSalary() * this.getHoursWorked()) + (this.getOvertimeSalary() * this.getOvertimeWorked());
     }
 
+    public boolean addPatient (Patient p ) {
+        if ((patientNum + 1) < patientCap) {
+            patients.add(p);
+            return true;
+        }
+        return false;
+    }
+
     public boolean addPatient (String id, Patient[] patientList) {
-        if (patientNum < patientCap) {
+        if ((patientNum + 1) < patientCap) {
             for (int i = 0; i < patientList.length; i++) {
                 if (patientList[i].getId().equals(id)) {
                     patients.add(patientList[i]);
@@ -88,6 +96,7 @@ public class Medical extends Staff {
         else if (ward instanceof Paedology) toReturn = "Paedology";
         else if (ward instanceof Ememergency) toReturn = "Emergency";
         else toReturn = "General";
+        return toReturn;
     }
 }
 

@@ -1,5 +1,11 @@
-import java.util.*;
+import java.util.Scanner; // allows use of Scanners
 
+
+/**
+ * Staff is a base class for all staff personnel within the hospital. It
+ * serves as a shell for all general employees and a starting point to those
+ * who have greater informational needs.
+ * */
 public abstract class Staff {
 
     /*FIELDS*/
