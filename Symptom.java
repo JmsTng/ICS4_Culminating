@@ -29,8 +29,6 @@ class Mild extends Symptom {
     private final int SYMPTOM_BASE_POINTS = 1;
     private final double BASE_COST = 25;
 
-    private double cost = BASE_COST;
-
 
     public Mild(String name) {
         super(name);
@@ -40,14 +38,9 @@ class Mild extends Symptom {
         super(name, description);
     }
 
-    public Mild(String name, String description, double cost) {
-        super(name, description);
-        this.cost = cost;
-    }
-
 
     public double getCost() {
-        return cost;
+        return BASE_COST;
     }
 
     public int getTriage() {
@@ -57,9 +50,7 @@ class Mild extends Symptom {
 
 class Moderate extends Symptom {
     private final int SYMPTOM_BASE_POINTS = 3;
-    private final double BASE_COST = 25;
-
-    private double cost = BASE_COST;
+    private final double BASE_COST = 70;
 
 
     public Moderate(String name) {
@@ -70,14 +61,9 @@ class Moderate extends Symptom {
         super(name, description);
     }
 
-    public Moderate(String name, String description, double cost) {
-        super(name, description);
-        this.cost = cost;
-    }
-
 
     public double getCost() {
-        return cost;
+        return BASE_COST;
     }
 
     public int getTriage() {
@@ -87,9 +73,7 @@ class Moderate extends Symptom {
 
 class Severe extends Symptom {
     private final int SYMPTOM_BASE_POINTS = 5;
-    private final double BASE_COST = 25;
-
-    private double cost = BASE_COST;
+    private final double BASE_COST = 200;
 
 
     public Severe(String name) {
@@ -100,14 +84,9 @@ class Severe extends Symptom {
         super(name, description);
     }
 
-    public Severe(String name, String description, double cost) {
-        super(name, description);
-        this.cost = cost;
-    }
-
 
     public double getCost() {
-        return cost;
+        return BASE_COST;
     }
 
     public int getTriage() {

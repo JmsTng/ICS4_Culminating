@@ -1,7 +1,8 @@
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Patient {
-    public final double BASE_COST = 0;  //
+    public final double BASE_COST = 300;
     
     private static int idCount = 0;
     
@@ -49,11 +50,6 @@ public class Patient {
         return ward;
     }
 
-    private boolean setWard(Ward ward) {
-        this.ward = ward;
-        return true;
-    }
-
     public int getTriage() {
         int triage = 0;
 
@@ -62,6 +58,16 @@ public class Patient {
         }
 
         return triage;
+    }
+
+    public int getNumSevere() { // TODO: NEEDS EXTENSIVE TESTING (IDK HOW INSTANCEOF WILL WORK)
+        int num = 0;
+
+        for (Symptom s : symptoms) {
+            if (s instanceof Severe) num++;
+        }
+
+        return num;
     }
 
 
@@ -105,7 +111,21 @@ public class Patient {
     }
 
     public boolean assignWard(Ward ward) {
-        return ward.addPatient(this) && setWard(ward);
+        if (ward.addPatient(this)) {
+            this.ward = ward;
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean assignMedicalStaff(Medical staff) {
+        if (staff.addPatient(this)) {
+            this.medicalPersonnel.add(staff);
+            return true;
+        }
+
+        return false;
     }
 
     public double bill() {
@@ -120,7 +140,7 @@ public class Patient {
     public boolean matchName(String name) { // addition: for searching
         if (name == null) return false;
 
-        for (int i = 0; i < name.length(); i++) {
+        for (int i = 0; i < name.length() && i < this.name.length(); i++) {
             if (this.name.charAt(i) != name.charAt(i)) return false;
         }
 
@@ -140,8 +160,8 @@ public class Patient {
         return this.id.compareToIgnoreCase(patient.getId());
     }
 
-
-    private int _searchSymptom(String name) {  // Added to assist in finding symptoms to delete
+    public int searchSymptom(String name) {
+        // Added to assist in finding symptoms to delete and cancers
         for (int i = 0; i < symptoms.size(); i++) {
             if (symptoms.get(i).getName().equals(name)) return i;
         }
