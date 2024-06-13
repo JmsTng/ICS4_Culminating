@@ -174,9 +174,9 @@ public class Hospital {
    
    private boolean sSearch(int searchType, String search, int index) {
       if (searchType == 1){
-         staff.get(index).matchName(search);
+         return staff.get(index).matchName(search);
       }else{
-         staff.get(index).matchEmployeeNumber(search);
+         return staff.get(index).matchEmployeeNumber(search);
       }
    }
    
