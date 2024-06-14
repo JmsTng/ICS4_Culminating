@@ -1,14 +1,13 @@
-import java.util.ArrayList; // Allows use of array lists
-
+import java.util.ArrayList;
 
 /**
  * Subclass of staff and a parent class of Doctor. This class
  * holds information for all staff who are trained in handling
  * patients and in medicine.
- * */
+ */
 public class Medical extends Staff {
 
-    private static int patientCap = 10;
+    private int patientCap = 10;
     private int patientNum;
     private ArrayList<Patient> patients;
     private Ward ward;
@@ -17,18 +16,37 @@ public class Medical extends Staff {
      * Creates a new medical staff member and sets up a patient array list
      * that is now ready to hold any and all patients assigned to the medical
      * doctor.
-     * */
+     *
+     * @param name             The name of the employee housed in a string
+     * @param employeeNum      Employee number that is unique to each separate employee
+     * @param salary           Used to calculate cost to hospital
+     * @param overtimeSalary   Used to calculate cost to hospital
+     */
     public Medical (String name, String employeeNum, double salary, double overtimeSalary) {
         super (name, employeeNum, salary, overtimeSalary);
         patientNum = 0;
         patients = new ArrayList<Patient>();
     }
 
+    /**
+     * Changes the capacity of patients that the medical staff can hold. The cap
+     * is automatically set to 10.
+     *
+     * @param newCap   The new capacity for this doctor
+     */
     public void changePatientCap (int newCap) {
         patientCap = newCap;
     }
 
+    /**
+     * Adds a patient to the medical practitioner's list and returns whether the 
+     * addition was successful.
+     * 
+     * @param p   The patient to add     
+     * @return    Whether the patient was added
+     */
     public boolean addPatient (Patient p ) {
+        if (patients.contains(p)) return false;
         if ((patientNum + 1) < patientCap) {
             patients.add(p);
             return true;
@@ -36,11 +54,20 @@ public class Medical extends Staff {
         return false;
     }
 
-    public boolean addPatient (String id, Patient[] patientList) {
+    /**
+     * Adds a patient to the medical practitioner's list and returns whether the 
+     * addition was successful.
+     * 
+     * @param id   The id of the patient to add
+     * @param patientList   The list of patients to check for the patient to add     
+     * @return    Whether the patient was added
+     */
+    public boolean addPatient (String id, ArrayList<Patient> patientList) {
         if ((patientNum + 1) < patientCap) {
-            for (int i = 0; i < patientList.length; i++) {
-                if (patientList[i].getId().equals(id)) {
-                    patients.add(patientList[i]);
+            for (Patient patient : patientList) {
+                if (patient.getId().equals(id)) {
+                    if (patients.contains(patient)) return false;
+                    patients.add(patient);
                     patientNum++;
                     return true;
                 }
@@ -49,6 +76,12 @@ public class Medical extends Staff {
         return false;
     }
 
+    /**
+     * Removes a patient from the medical staffs patient list through patient id.
+     * 
+     * @param id   The id of the patient to remove
+     * @return     Whether the patient has been successfully removed
+     */
     public boolean removePatient (String id) {
         for (int i = 0; i < patientNum; i++) {
             if (patients.get(i).getId().equals(id)) {
@@ -60,7 +93,23 @@ public class Medical extends Staff {
         return false;
     }
 
-    public boolean setWard (Ward w) {
+    /**
+     * Removes a patient from the medical staffs patient list through patient object. 
+     * 
+     * @param p   The patient to remove
+     * @return    Whether the patient has been successfully removed
+     */
+    public boolean removePatient (Patient p) {
+        return patients.remove(p);
+    }
+
+    /**
+     * Places the medical staff into a specific ward.
+     * 
+     * @param w   The ward to be place in
+     * @return    Whether the assignment was successful
+     */
+    public boolean assignWard (Ward w) {
         if (w.addStaff(this)) {
             ward = w;
             return true;
@@ -69,55 +118,50 @@ public class Medical extends Staff {
         }
     }
 
-    public boolean useEquipment(String name, int quant) {
+    /**
+     * Allows the medical practitioner to use equipment and keep track
+     * of how many pieces of equipment is open.
+     * 
+     * @param name       The name of the equipment
+     * @param quantity   Number of equipment to use
+     * @return           Whether the staff can use it
+     */
+    public boolean useEquipment(String name, int quantity) {
         Equipment e = ward.getEquipment(name);
         if (e == null) return false;
 
-        if ((e.getInUse() + quant) <= e.getQuantity()) {
-            e.setInUse(e.getInUse()+quant);
+        if ((e.getInUse() + quantity) <= e.getQuantity()) {
+            e.setInUse(e.getInUse()+quantity);
             return true;
         }
         else return false;
     }
 
+
+    /**
+     * Returns a string with all the properties of the toString() in Staff
+     * plus the ward where the staff member is place and the number of patients
+     * they are servicing.
+     *
+     * @return   A string with information on the staff member
+     */
     public String toString() {
         return super.toString() + "\nWard: " + _getWardName() + "\nPatients: " + patientNum;
     }
 
+    /**
+     * Returns the type of ward that the medical staff is in.
+     *
+     * @return   Type of ward
+     */
     private String _getWardName() {
         String toReturn;
-        if (ward instanceof Oncology) toReturn = "Oncology";
+        if (ward instanceof Emergency) toReturn = "Oncology";
         else if (ward instanceof ICU) toReturn = "ICU";
         else if (ward instanceof Paedology) toReturn = "Paedology";
-        else if (ward instanceof Emergency) toReturn = "Emergency";
-        else toReturn = "General";
+        else if (ward instanceof Oncology) toReturn = "Emergency";
+        else if (ward instanceof Ward) toReturn = "General";
+        else toReturn = "NO ASSIGNED WARD";
         return toReturn;
     }
-}
-
-class Doctor extends Medical {
-
-    private String speciality;
-
-    public static int patientCap = 5;
-
-    public static double overTimeSalary = 0;
-
-    public Doctor (String name, String employeeNum, double salary, double overtimeSalary, String speciality) {
-        super (name, employeeNum, salary, overtimeSalary);
-        this.speciality = speciality;
-    }
-
-    public String getSpeciality() {
-        return speciality;
-    }
-
-    public void setSpeciality(String s) {
-        speciality = s;
-    }
-
-    public String toString() {
-        return super.toString() + "\nSpeciality: " + speciality;
-    }
-
 }

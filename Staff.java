@@ -1,6 +1,3 @@
-import java.util.Scanner; // allows use of Scanners
-
-
 /**
  * Staff is a base class for all staff personnel within the hospital. It
  * serves as a shell for all general employees and a starting point to those
@@ -74,7 +71,7 @@ public class Staff {
      * @param name             The name of the employee housed in a string
      * @param employeeNum      Employee number that is unique to each separate employee
      * @param salary           Used to calculate cost to hospital
-     * @param overtimeSalary   Used to calculate cost to hospital and is set as 0 for doctors
+     * @param overtimeSalary   Used to calculate cost to hospital
      * */
     public Staff(String name, String employeeNum, double salary, double overtimeSalary) {
         this.name = name;
@@ -190,6 +187,17 @@ public class Staff {
     }
 
     /**
+     * Resets the number of hours worked in both overtime and regular to 0.
+     *
+     * @return whether the hours have been reset
+     * */
+    public boolean resetHours() {
+        overtimeWorked = 0;
+        hoursWorked = 0;
+        return overtimeWorked == 0 && hoursWorked == 0;
+    }
+
+    /**
      * Returns a string containing name, number, salary, and hourly information when the staff
      * member is to be printed.
      *
@@ -197,69 +205,6 @@ public class Staff {
      * */
     public String toString() {
         return String.format("Name: %s\nEmployee Number: %s\nSalary: %2.2f\nHours Worked: %.2f\nOvertime Salary: %2.2f\nOvertime Hours Worked: %.2f", name, employeeNum, salary, hoursWorked, overtimeSalary, overtimeWorked);
-    }
-
-}
-
-
-
-class Admin extends Staff {
-
-    /*FIELDS*/
-    private String userName;
-    private String password;
-
-    /*ACCESSOR AND MUTATORS*/
-    public String getUsername() {
-        return userName;
-    }
-
-    public void setUsername(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    /*CONSTRUCTOR*/
-
-    /**
-     * Creates a new admin type staff, sets up a username and password
-     * that is unique to each admin as a verification step.
-     *
-     * @param name         The name of the employee housed in a string
-     * @param num          Employee number that is unique to each separate employee
-     * @param sal          Used to calculate cost to hospital
-     * @param overTimeSal  Used to calculate cost to hospital and is set as 0 for doctors
-     * */
-    public Admin(String name, String num, double sal, double overTimeSal) {
-        super(name, num, sal, overTimeSal);
-        Scanner sc = new Scanner(System.in);
-        userName = getEmployeeNum();
-        System.out.println("Password: ");
-        password = sc.nextLine();
-    }
-
-    /**
-     * Prompts for the admins username and password
-     * and returns whether it was correct or not.
-     *
-     * @return   Whether the username and password were correct
-     * */
-    public boolean login() {
-        Scanner sc = new Scanner(System.in);
-        String user, pass;
-        System.out.print("Username: ");
-        user = sc.nextLine();
-        System.out.print("Password: ");
-        pass = sc.nextLine();
-
-        return user.equals(userName) && pass.equals(password);
     }
 
 }
