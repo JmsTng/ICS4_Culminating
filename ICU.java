@@ -1,8 +1,10 @@
 import java.util.ArrayList;
 
-public class ICU extends Ward {  
+public class ICU extends Ward{
+   
    public ICU(){
       super();
+      this.baseOperatingCost = 100000;
    }
    
    public double getOperatingCost(){
@@ -27,7 +29,7 @@ public class ICU extends Ward {
    
    public boolean removePatient(String id){
       for(int i = 0; i < numPatient; i++){
-         if(id = patientList.get(i)){
+         if(id == patientList.get(i).getName()){
             patientList.remove(i);
             numPatient--;
             return true;
@@ -39,16 +41,19 @@ public class ICU extends Ward {
    }
    
    public boolean addEquipment(Equipment e, int num){
-      for(int i = 0; i < numEquipment; i++){
-         if(equipmentList.get(i).getName() == e.getName()){
-            equipmentList.get(i).setQuantity(equipmentList.get(i).getQuantity() + num);
-            return true;
-            //return true if equipment was added to existing object within array
-         } 
+      if(this.totalEquipment()<maxEquipment){
+         for(int i = 0; i < numEquipment; i++){
+            if(equipmentList.get(i).getName() == e.getName()){
+               equipmentList.get(i).setQuantity(equipmentList.get(i).getQuantity() + num);
+               return true;
+               //return true if equipment was added to existing object within array
+            } 
+         }
+         equipmentList.add(new Equipment(this,e.getName(),num,e.getMaintenanceCost()));
+         return true;
+         //or, return true if new equipment was made and added to array
       }
-      equipmentList.add(new Equipment(this,e.getName(),num,e.getMaintainCost()));
       return false;
-      //return false if new equipment object was created
    }
    
    public boolean removeEquipment(Equipment e, int num){
@@ -56,19 +61,30 @@ public class ICU extends Ward {
          if(equipmentList.get(i).getName() == e.getName()){
             equipmentList.remove(i);
             numEquipment--;
-            return true
+            return true;
+            //return true if equipment with matching name succesfully REMOVED from array
          } 
       }
       return false;
+      //return false if equipment with name not found
    }
    
    public Equipment getEquipment(String name){
       for(int i = 0; i < numEquipment; i++){
          if(equipmentList.get(i).getName() == name){
             return equipmentList.get(i);
+            //returns Equipment object with name matching parameter String 
          }         
       }
       return null;
+   }
+   
+   public int totalEquipment(){
+      int sum = 0;
+      for(int i = 0; i < numEquipment; i++){
+         sum+=equipmentList.get(i).getQuantity();
+      }
+      return sum;
    }
    
    public boolean addStaff(Medical m){
@@ -82,7 +98,7 @@ public class ICU extends Ward {
    
    public boolean removeStaff(String id){
       for(int i = 0; i < numMedical; i++){
-         if(medicalList.get(i).getId == id){
+         if(medicalList.get(i).getEmployeeNum() == id){
             medicalList.remove(i);
             numMedical--;
             return true;
@@ -92,6 +108,13 @@ public class ICU extends Ward {
    }
    
    public boolean determineSuitability(Patient p){
-      //get symptomList from patient and check for at least 3 severe ones
+   //if there are more than 3 severe symptoms, they are suitable
+      if(p.getNumSevere()>3){
+         return true;
+      }
+      return false;
+   }
+   public String toString(){
+      return "ICU Ward\nNumber of Staff: " +numMedical+"\nNumber of Patients: "+numPatient+"\nNumber of Equipment: "+numEquipment;
    }
 }

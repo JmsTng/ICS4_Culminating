@@ -1,24 +1,21 @@
 import java.util.ArrayList;
 
 public class Ward{
-   private ArrayList<Equipment> equipmentList = new ArrayList<Equipment>();
-   private static int maxEquipment = 150;
-   private int numEquipment;
-   private ArrayList<Patient> patientList = new ArrayList<Patient>();
-   private static int maxPatient = 100;
-   private int numPatient;
-   private ArrayList<Medical> medicalList = new ArrayList<Medical>();
-   private static int maxMedical = 15;
-   private int numMedical;
-   private double baseOperatingCost;
+   protected ArrayList<Equipment> equipmentList = new ArrayList<Equipment>();
+   protected static int maxEquipment = 150;
+   protected int numEquipment;
+   protected ArrayList<Patient> patientList = new ArrayList<Patient>();
+   protected static int maxPatient = 100;
+   protected int numPatient;
+   protected ArrayList<Medical> medicalList = new ArrayList<Medical>();
+   protected static int maxMedical = 15;
+   protected int numMedical;
+   protected double baseOperatingCost;
    
    
    public Ward(){
-      this.maxEquipment = maxEquipment;
       this.numEquipment = 0;
-      this.maxPatient = maxPatient;
       this.numPatient = 0;
-      this.maxMedical = maxMedical;
       this.numMedical = 0;
       this.baseOperatingCost = 1000000;
    }
@@ -114,7 +111,7 @@ public class Ward{
    
    public boolean removeStaff(String id){
       for(int i = 0; i < numMedical; i++){
-         if(medicalList.get(i).getId() == id){
+         if(medicalList.get(i).getEmployeeNum() == id){
             medicalList.remove(i);
             numMedical--;
             return true;

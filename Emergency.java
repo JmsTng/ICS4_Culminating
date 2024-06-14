@@ -4,6 +4,7 @@ public class Emergency extends Ward{
    
    public Emergency(){
       super();
+      this.baseOperatingCost = 100000;
    }
    
    public double getOperatingCost(){
@@ -97,7 +98,7 @@ public class Emergency extends Ward{
    
    public boolean removeStaff(String id){
       for(int i = 0; i < numMedical; i++){
-         if(medicalList.get(i).getId() == id){
+         if(medicalList.get(i).getEmployeeNum() == id){
             medicalList.remove(i);
             numMedical--;
             return true;
@@ -114,6 +115,6 @@ public class Emergency extends Ward{
       return false;
    }
    public String toString(){
-      return "General Ward\nNumber of Staff: " +numMedical+"\nNumber of Patients: "+numPatient+"\nNumber of Equipment: "+numEquipment;
+      return "Emergency Ward\nNumber of Staff: " +numMedical+"\nNumber of Patients: "+numPatient+"\nNumber of Equipment: "+numEquipment;
    }
 }
