@@ -1,5 +1,11 @@
 import java.util.ArrayList; // Allows use of array lists
 
+
+/**
+ * Subclass of staff and a parent class of Doctor. This class
+ * holds information for all staff who are trained in handling
+ * patients and in medicine.
+ * */
 public class Medical extends Staff {
 
     private static int patientCap = 10;
@@ -7,6 +13,11 @@ public class Medical extends Staff {
     private ArrayList<Patient> patients;
     private Ward ward;
 
+    /**
+     * Creates a new medical staff member and sets up a patient array list
+     * that is now ready to hold any and all patients assigned to the medical
+     * doctor.
+     * */
     public Medical (String name, String employeeNum, double salary, double overtimeSalary) {
         super (name, employeeNum, salary, overtimeSalary);
         patientNum = 0;
@@ -15,22 +26,6 @@ public class Medical extends Staff {
 
     public void changePatientCap (int newCap) {
         patientCap = newCap;
-    }
-
-    public boolean enterHours(double hours) {
-        double newHours = this.getHoursWorked() + hours;
-        this.setHoursWorked(newHours);
-        return true;
-    }
-
-    public boolean enterOverTimeHours(double hours) {
-        double newHours = this.getOvertimeWorked() + hours;
-        this.setOvertimeWorked(newHours);
-        return true;
-    }
-
-    public double getMonthlySalary() {
-        return (this.getSalary() * this.getHoursWorked()) + (this.getOvertimeSalary() * this.getOvertimeWorked());
     }
 
     public boolean addPatient (Patient p ) {
@@ -66,7 +61,7 @@ public class Medical extends Staff {
     }
 
     public boolean setWard (Ward w) {
-        if (w.addMedical(this)) {
+        if (w.addStaff(this)) {
             ward = w;
             return true;
         } else {
@@ -94,7 +89,7 @@ public class Medical extends Staff {
         if (ward instanceof Oncology) toReturn = "Oncology";
         else if (ward instanceof ICU) toReturn = "ICU";
         else if (ward instanceof Paedology) toReturn = "Paedology";
-        else if (ward instanceof Ememergency) toReturn = "Emergency";
+        else if (ward instanceof Emergency) toReturn = "Emergency";
         else toReturn = "General";
         return toReturn;
     }

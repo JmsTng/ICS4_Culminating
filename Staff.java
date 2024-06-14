@@ -6,7 +6,7 @@ import java.util.Scanner; // allows use of Scanners
  * serves as a shell for all general employees and a starting point to those
  * who have greater informational needs.
  * */
-public abstract class Staff {
+public class Staff {
 
     /*FIELDS*/
     private String name;
@@ -66,6 +66,16 @@ public abstract class Staff {
     }
 
     /*CONSTRUCTOR*/
+
+    /**
+     * Creates a new Staff member using inputted parameters to designate a name,
+     * employee number, salary, as well as an overtime salary.
+     *
+     * @param name             The name of the employee housed in a string
+     * @param employeeNum      Employee number that is unique to each separate employee
+     * @param salary           Used to calculate cost to hospital
+     * @param overtimeSalary   Used to calculate cost to hospital and is set as 0 for doctors
+     * */
     public Staff(String name, String employeeNum, double salary, double overtimeSalary) {
         this.name = name;
         this.employeeNum = employeeNum;
@@ -76,12 +86,49 @@ public abstract class Staff {
     }
 
     /*METHODS*/
-    public abstract boolean enterHours(double hours);
 
-    public abstract boolean enterOverTimeHours(double hours);
+    /**
+     * Adds to the hours that this staff member has worked
+     *
+     * @param hours   The amount of hours to add to the staffs worked hours
+     *
+     * @return        Whether the hours have been successfully added
+     * */
+    public boolean enterHours(double hours) {
+        double newHours = this.getHoursWorked() + hours;
+        this.setHoursWorked(newHours);
+        return true;
+    }
 
-    public abstract double getMonthlySalary();
+    /**
+     * Adds to the overtime hours that this staff member has worked
+     *
+     * @param hours   The amount of hours to add to the staffs worked hours
+     *
+     * @return        Whether the hours have been successfully added
+     * */
+    public boolean enterOverTimeHours(double hours) {
+        double newHours = this.getOvertimeWorked() + hours;
+        this.setOvertimeWorked(newHours);
+        return true;
+    }
 
+    /**
+     * Calculates the monthly salary of the Staff using the inputted hours and salaries
+     *
+     * @return the income of the staff member
+     * */
+    public double getMonthlySalary() {
+        return (this.getSalary() * this.getHoursWorked()) + (this.getOvertimeSalary() * this.getOvertimeWorked());
+    }
+
+    /**
+     * Returns whether 2 names are the same or similar
+     *
+     * @param name   The name to match to this staff members name
+     *
+     * @return       Whether the 2 names match
+     * */
     public boolean matchName(String name) {
         if (name == null) return false;
 
@@ -91,6 +138,14 @@ public abstract class Staff {
         return true;
     }
 
+
+    /**
+     * Returns whether 2 employee numbers are the same
+     *
+     * @param num   The employee number to match to this staff members
+     *
+     * @return       Whether the 2 numbers match
+     * */
     public boolean matchEmployeeNum(String num) {
         if (num == null || employeeNum.length() != num.length()) return false;
 
@@ -100,18 +155,46 @@ public abstract class Staff {
         return true;
     }
 
+    /**
+     * Returns the difference between this staff members name and another
+     *
+     * @param s   The staff member to compare to
+     *
+     * @return    The difference between the 2 names as dictated by compareToIgnoreCase()
+     * */
     public int compareName(Staff s) {
         return this.name.compareToIgnoreCase(s.getName());
     }
 
-    public int compareId(Staff s) {
+    /**
+     * Returns the difference between this staff members employee number and another
+     *
+     * @param s   The staff member to compare to
+     *
+     * @return    The difference between the 2 numbers as dictated by compareToIgnoreCase()
+     * */
+    public int compareEmployeeNum(Staff s) {
         return this.employeeNum.compareToIgnoreCase(s.getEmployeeNum());
     }
 
+    /**
+     * Returns the difference between this staff members salary and another, only calculates
+     * for normal salary.
+     *
+     * @param s   The staff member to compare to
+     *
+     * @return    The difference between the 2 salary's as dictated by compareToIgnoreCase()
+     * */
     public double compareSalary(Staff s) {
         return this.salary - s.getSalary();
     }
 
+    /**
+     * Returns a string containing name, number, salary, and hourly information when the staff
+     * member is to be printed.
+     *
+     * @return   A string with information on the staff
+     * */
     public String toString() {
         return String.format("Name: %s\nEmployee Number: %s\nSalary: %2.2f\nHours Worked: %.2f\nOvertime Salary: %2.2f\nOvertime Hours Worked: %.2f", name, employeeNum, salary, hoursWorked, overtimeSalary, overtimeWorked);
     }
@@ -122,9 +205,11 @@ public abstract class Staff {
 
 class Admin extends Staff {
 
+    /*FIELDS*/
     private String userName;
     private String password;
 
+    /*ACCESSOR AND MUTATORS*/
     public String getUsername() {
         return userName;
     }
@@ -141,33 +226,35 @@ class Admin extends Staff {
         this.password = password;
     }
 
+    /*CONSTRUCTOR*/
 
-    public Admin(String name, String num, double sal, double overTimeSal, String password) {
+    /**
+     * Creates a new admin type staff, sets up a username and password
+     * that is unique to each admin as a verification step.
+     *
+     * @param name         The name of the employee housed in a string
+     * @param num          Employee number that is unique to each separate employee
+     * @param sal          Used to calculate cost to hospital
+     * @param overTimeSal  Used to calculate cost to hospital and is set as 0 for doctors
+     * */
+    public Admin(String name, String num, double sal, double overTimeSal) {
         super(name, num, sal, overTimeSal);
+        Scanner sc = new Scanner(System.in);
         userName = getEmployeeNum();
-        this.password = password;
+        System.out.println("Password: ");
+        password = sc.nextLine();
     }
 
-    public boolean enterHours(double hours) {
-        double newHours = this.getHoursWorked() + hours;
-        this.setHoursWorked(newHours);
-        return true;
-    }
-
-    public boolean enterOverTimeHours(double hours) {
-        double newHours = this.getOvertimeWorked() + hours;
-        this.setOvertimeWorked(newHours);
-        return true;
-    }
-
-    public double getMonthlySalary() {
-        return (this.getSalary() * this.getHoursWorked()) + (this.getOvertimeSalary() * this.getOvertimeWorked());
-    }
-
+    /**
+     * Prompts for the admins username and password
+     * and returns whether it was correct or not.
+     *
+     * @return   Whether the username and password were correct
+     * */
     public boolean login() {
         Scanner sc = new Scanner(System.in);
         String user, pass;
-        System.out.print("UserName: ");
+        System.out.print("Username: ");
         user = sc.nextLine();
         System.out.print("Password: ");
         pass = sc.nextLine();
