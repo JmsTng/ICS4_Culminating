@@ -2,17 +2,26 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 public class Patient {
+    // Constants //
     public final double BASE_COST = 300;
-    
+
+    // Static Variables //
     private static int idCount = 0;
-    
+
+    // Fields //
     private String name;
     private String id;
     private ArrayList<Symptom> symptoms;
     private ArrayList<Medical> medicalPersonnel;
     private Ward ward;
 
-    
+
+    // Constructor //
+    /**
+     * Constructs a Patient object.
+     * Other than name, all other fields are automatically assigned at creation.
+     * @param name the name of the Patient
+     */
     public Patient(String name) {
         this.name = name;
         this.id = ("%0" + 5 + "x").formatted(idCount); // Stores 1048576 patients
@@ -22,34 +31,59 @@ public class Patient {
     }
 
 
+    // Accessors & Mutators //
+    /**
+     * Retrieve the Patient's name.
+     * @return the name of the Patient
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Set the name field.
+     * @param name the new name for the Patient
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Retrieve the Patient's ID.
+     * @return the ID of the Patient
+     */
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
+    /**
+     * Retrieve the Patient's list of assigned Medical staff.
+     * @return the staff roster for that Patient
+     */
     public ArrayList<Medical> getMedicalPersonnel() {
         return medicalPersonnel;
     }
 
+    /**
+     * Retrieve the Patient's list of current symptoms.
+     * @return the list of current Symptoms for that Patient
+     */
     public ArrayList<Symptom> getSymptoms() {
         return symptoms;
     }
 
+    /**
+     * Retrieve the Ward the Patient is in.
+     * @return the Ward the Patient is assigned to
+     */
     public Ward getWard() {
         return ward;
     }
 
+    /**
+     * Retrieve the "severity level"/priority of a patient
+     * @return the sum of the triage points of each Symptom
+     */
     public int getTriage() {
         int triage = 0;
 
@@ -60,6 +94,10 @@ public class Patient {
         return triage;
     }
 
+    /**
+     * Retrieve the number of Severe Symptoms in the Symptom list.
+     * @return number of Symptoms which are Severe
+     */
     public int getNumSevere() { // TODO: NEEDS EXTENSIVE TESTING (IDK HOW INSTANCEOF WILL WORK)
         int num = 0;
 
@@ -71,6 +109,13 @@ public class Patient {
     }
 
 
+    /**
+     * Add a Symptom to the Patient's list of Symptoms.
+     * @param severity determine which level of severity
+     * @param name
+     * @param description
+     * @return
+     */
     public boolean addSymptom(int severity, String name, String description) {
         switch (severity) {
             case 0 -> { symptoms.add(new Mild(name, description)); }
@@ -100,7 +145,7 @@ public class Patient {
     }
 
     public boolean removeSymptom(String name) {
-        int i = _searchSymptom(name);
+        int i = searchSymptom(name);
 
         if (i != -1) {
             symptoms.remove(i);
@@ -128,6 +173,15 @@ public class Patient {
         return false;
     }
 
+    public boolean removeMedicalStaff(Medical staff) {
+        if (staff.removePatient(this)) {
+            this.medicalPersonnel.remove(staff);
+            return true;
+        }
+
+        return false;
+    }
+
     public double bill() {
         double cost = BASE_COST;
         for (Symptom s : symptoms) {
@@ -135,6 +189,13 @@ public class Patient {
         }
 
         return cost;
+    }
+
+
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Patient)) return false;
+
+        return this.id.equals(((Patient) obj).getId());
     }
 
     public boolean matchName(String name) { // addition: for searching
