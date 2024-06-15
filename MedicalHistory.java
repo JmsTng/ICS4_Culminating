@@ -20,6 +20,7 @@ public class MedicalHistory {
     public void saveRecord(String date) {
         Ward ward = this.patient.getWard();
         ArrayList<Symptom> symptoms = this.patient.getSymptoms();
+        ArrayList<Medical> staff = this.patient.getMedicalPersonnel();
 
         try (BufferedWriter fw = new BufferedWriter(new FileWriter(this.dir + this.path, true));) {
             fw.write(date + "\n");
@@ -32,6 +33,15 @@ public class MedicalHistory {
             else if (ward instanceof Ward) { fw.write("General"); }
 
             fw.write("%d".formatted(symptoms.size()));
+            for (Symptom s : symptoms) {
+                fw.write(s.toString());
+            }
+
+            fw.write("%d".formatted(staff.size()));
+            for (Medical s : staff) {
+                fw.write(s.getEmployeeNum());
+                fw.write(s.getName());
+            }
         } catch (IOException e) {}
     }
 }

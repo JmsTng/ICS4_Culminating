@@ -23,6 +23,8 @@ public abstract class Symptom {
     public abstract double getCost();
 
     public abstract int getTriage();
+
+    public abstract String toString(); // Added for file writing
 }
 
 class Mild extends Symptom {
@@ -45,6 +47,11 @@ class Mild extends Symptom {
 
     public int getTriage() {
         return SYMPTOM_BASE_POINTS;
+    }
+
+    public String toString() {
+        // Severity, Name[, Description]
+        return "1," + this.getName() + (this.getDescription() == null ? "" : "," + this.getDescription());
     }
 }
 
@@ -69,6 +76,11 @@ class Moderate extends Symptom {
     public int getTriage() {
         return SYMPTOM_BASE_POINTS;
     }
+
+    public String toString() {
+        // Severity, Name[, Description]
+        return "2," + this.getName() + (this.getDescription() == null ? "" : "," + this.getDescription());
+    }
 }
 
 class Severe extends Symptom {
@@ -91,5 +103,10 @@ class Severe extends Symptom {
 
     public int getTriage() {
         return SYMPTOM_BASE_POINTS;
+    }
+
+    public String toString() {
+        // Severity, Name[, Description]
+        return "3," + this.getName() + (this.getDescription() == null ? "" : "," + this.getDescription());
     }
 }

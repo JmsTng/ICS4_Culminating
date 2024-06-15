@@ -224,7 +224,7 @@ public class Patient {
     public int searchSymptom(String name) {
         // Added to assist in finding symptoms to delete and cancers
         for (int i = 0; i < symptoms.size(); i++) {
-            if (symptoms.get(i).getName().equals(name)) return i;
+            if (symptoms.get(i).getName().toUpperCase().contains(name.toUpperCase())) return i;
         }
 
         return -1;
