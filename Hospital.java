@@ -324,7 +324,7 @@ public class Hospital {
          for (int i = 0; i < staff.size(); i++){
             Staff temp = staff.get(i);
             if (temp instanceof Doctor){
-               write.write("d\n" + temp.getSpecialty());
+               write.write("d");
             }else if (temp instanceof Medical){
                write.write("m");
             }else if (temp instanceof Admin){
@@ -333,6 +333,9 @@ public class Hospital {
                write.write("s");
             }
             write.write(temp.getName() + "\n" + temp.getEmployeeNum + "\n" + temp.getSalary() + "\n" + temp.getOvertimeSalary());
+            if (temp instanceof Doctor){
+               write.write(Doctor(temp).getSpecialty());
+            }
          }
       }catch (IOException e){
       }
