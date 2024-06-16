@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 /**
  * Subclass of Medical and Staff. Holds information on speciality
  * for Medical staff who are doctors and resets some values.

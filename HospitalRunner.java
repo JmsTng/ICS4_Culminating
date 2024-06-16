@@ -8,7 +8,6 @@ public class HospitalRunner {
         String name = "";
         char userInput;
         double budget;
-        int wCap, pCap, sCap;
         boolean verified;
         Scanner sc = new Scanner(System.in);
 
@@ -21,13 +20,7 @@ public class HospitalRunner {
                 name = sc.nextLine();
                 System.out.println("Budget:                ");
                 budget = Double.parseDouble(sc.nextLine());
-                System.out.println("Maximum # of Wards:    ");
-                wCap = Integer.parseInt(sc.nextLine());
-                System.out.println("Maximum # of Patients: ");
-                pCap = Integer.parseInt(sc.nextLine());
-                System.out.println("Maximum # of Staff:    ");
-                sCap = Integer.parseInt(sc.nextLine());
-                hospital = new Hospital(name, budget, wCap, pCap, sCap);
+                hospital = new Hospital(name, budget);
             }
 
             verified = login();
@@ -66,16 +59,18 @@ public class HospitalRunner {
 
 
     public static void ward() {
-        int match, max;
         char userInput;
         Scanner sc = new Scanner (System.in);
 
         System.out.println(""" 
+                
+                
                 Ward Options:
                 0. Create a Ward
                 1. Delete a Ward
                 2. View Ward Information
                 3. Add Equipment to Ward
+                4. Change operating cost
                 """);
         do {
             System.out.println("Enter a choice(0-3): ");
@@ -125,7 +120,7 @@ public class HospitalRunner {
                     8. Exit Patient
                     9. Exit Program""");
             do {
-                System.out.println("Enter a choice(0-9): ");
+                System.out.print("Enter a choice(0-9): ");
                 userInput = sc.nextLine().charAt(0);
             } while (userInput < '0' || userInput > '9');
 
@@ -145,7 +140,7 @@ public class HospitalRunner {
                     }
 
                 case '2':
-                    System.out.println("Name: ");
+                    System.out.print("Name: ");
                     name = sc.nextLine();
                     hospital.addPatient(name);
 
@@ -158,7 +153,7 @@ public class HospitalRunner {
                     }
 
                     do {
-                        System.out.println("Enter a choice: ");
+                        System.out.print("Enter a choice: ");
                         try {
                             userChoice = Integer.parseInt(sc.nextLine());
                             cont = true;
@@ -181,7 +176,7 @@ public class HospitalRunner {
                     }
 
                     do {
-                        System.out.println("Enter a choice: ");
+                        System.out.print("Enter a choice: ");
                         try {
                             userChoice = Integer.parseInt(sc.nextLine());
                             cont = true;
@@ -205,7 +200,7 @@ public class HospitalRunner {
                     }
 
                     do {
-                        System.out.println("Enter a choice: ");
+                        System.out.print("Enter a choice: ");
                         try {
                             userChoice = Integer.parseInt(sc.nextLine());
                             cont = true;
@@ -228,7 +223,7 @@ public class HospitalRunner {
                     }
 
                     do {
-                        System.out.println("Enter a choice: ");
+                        System.out.print("Enter a choice: ");
                         try {
                             userChoice = Integer.parseInt(sc.nextLine());
                             cont = true;
@@ -249,7 +244,7 @@ public class HospitalRunner {
                     }
 
                     do {
-                        System.out.println("Enter a choice: ");
+                        System.out.print("Enter a choice: ");
                         try {
                             userChoice = Integer.parseInt(sc.nextLine());
                             cont = true;
@@ -302,11 +297,11 @@ public class HospitalRunner {
                     2. Hire staff member
                     3. Fire staff member
                     4. Staff uses equipment
-                    5. Send to Ward
+                    5. Change Information
                     6. Exit Staff
                     7. Exit Program""");
             do {
-                System.out.println("Enter a choice(0-7): ");
+                System.out.print("Enter a choice(0-7): ");
                 userInput = sc.nextLine().charAt(0);
             } while (userInput < '0' || userInput > '7');
 
@@ -343,7 +338,7 @@ public class HospitalRunner {
                     }
 
                     do {
-                        System.out.println("Enter a choice: ");
+                        System.out.print("Enter a choice: ");
                         try {
                             userChoice = Integer.parseInt(sc.nextLine());
                             cont = true;
@@ -369,7 +364,7 @@ public class HospitalRunner {
                     }
 
                     do {
-                        System.out.println("Enter a choice: ");
+                        System.out.print("Enter a choice: ");
                         try {
                             userChoice = Integer.parseInt(sc.nextLine());
                             cont = true;
@@ -382,9 +377,9 @@ public class HospitalRunner {
 
                     do {
                         try {
-                            System.out.println("Equipment Name: ");
+                            System.out.print("Equipment Name: ");
                             name = sc.nextLine();
-                            System.out.println("Quantity: ");
+                            System.out.print("Quantity: ");
                             quantity = Integer.parseInt(sc.nextLine());
                             cont = true;
                         } catch (NumberFormatException e) {
@@ -398,7 +393,25 @@ public class HospitalRunner {
                     else System.out.println("Equipment is unavailable!");
 
                 case '5':
+                    int num1 = 0;
+                    staff = hospital.searchStaff();
+                    for (Staff member : staff) {
+                        System.out.println(num1 + ". " + member.getName() + "\n\tEmployee Number:" + member.getEmployeeNum());
+                        num1++;
+                    }
 
+                    do {
+                        System.out.print("Enter a choice: ");
+                        try {
+                            userChoice = Integer.parseInt(sc.nextLine());
+                            cont = true;
+                        } catch (NumberFormatException e) {
+                            cont = false;
+                        }
+                    } while (!cont && userChoice < staff.size());
+                    cont = true;
+
+                    staff.get(userChoice).updateInformation();
 
                 case '6':
                     cont = false;
@@ -427,7 +440,7 @@ public class HospitalRunner {
         }
         System.out.println((administrators.size() + 1) + ". Exit Program");
         do {
-            System.out.println("Enter a choice: ");
+            System.out.print("Enter a choice: ");
             try {
                 userInput = Integer.parseInt(sc.nextLine());
                 cont = true;

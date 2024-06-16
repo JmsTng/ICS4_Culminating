@@ -1,3 +1,5 @@
+import java.util.*;
+
 /**
  * Staff is a base class for all staff personnel within the hospital. It
  * serves as a shell for all general employees and a starting point to those
@@ -196,6 +198,65 @@ public class Staff {
         overtimeWorked = 0;
         hoursWorked = 0;
         return overtimeWorked == 0 && hoursWorked == 0;
+    }
+
+    public void updateInformation() {
+        boolean done = false;
+        char choice;
+        Scanner sc = new Scanner(System.in);
+
+        while (!done) {
+            System.out.println("What information would you like to change:" +
+                    "\n0. Name" +
+                    "\n1. Salary" +
+                    "\n2. Overtime Salary" +
+                    "\n3. Add to hours worked" +
+                    "\n4. Add to overtime hours worked");
+            if (this instanceof Doctor) System.out.println("5. Change speciality\n\n6. Exit");
+
+            do {
+                System.out.print("Enter a Choice: ");
+                choice = sc.nextLine().charAt(0);
+            } while (choice < '0' || choice > '6');
+
+            switch (choice) {
+                case '0':
+                    System.out.println("Old Name: " + name);
+                    System.out.print("New Name: ");
+                    setName(sc.nextLine());
+
+                case '1':
+                    System.out.printf("Old Salary: %.2f\n", salary);
+                    System.out.print("New Salary: ");
+                    setSalary(sc.nextDouble());
+
+                case '2':
+                    System.out.printf("Old Overtime Salary: %.2f\n", overtimeSalary);
+                    System.out.print("New Overtime Salary: ");
+                    setOvertimeSalary(sc.nextDouble());
+
+                case '3':
+                    System.out.printf("Hours Worked: %.2f", hoursWorked);
+                    System.out.print("New Hours: ");
+                    enterHours(sc.nextDouble());
+
+                case '4':
+                    System.out.printf("Overtime Hours Worked: %.2f", overtimeWorked);
+                    System.out.print("New Overtime Hours: ");
+                    enterOverTimeHours(sc.nextDouble());
+
+                case '5':
+                    if (this instanceof Doctor) {
+                        System.out.println("Old Speciality: " + ((Doctor) this).getSpeciality());
+                        System.out.print("New Speciality: ");
+                        ((Doctor) this).setSpeciality(sc.nextLine());
+                    }
+                    else done = true;
+
+                default:
+                    done = true;
+            }
+        }
     }
 
     /**
