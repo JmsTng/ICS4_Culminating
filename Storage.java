@@ -1,45 +1,44 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
-public class ICU extends Ward{
-   
-   public ICU(){
-      super();
-      this.baseOperatingCost = 100000;
+public class Storage extends Ward{
+   Scanner sc = new Scanner(System.in);
+
+   public Storage(){
+      this.numEquipment = 0;
+      this.numPatient = 0;
+      this.numMedical = 0;
+      this.baseOperatingCost = 10000;
    }
-   
+
    public double getOperatingCost(){
       double total = 0;
-      total += baseOperatingCost;
       for(int i = 0; i < numEquipment; i++){
          total += equipmentList.get(i).getMaintenanceCost()*equipmentList.get(i).getQuantity();
       }
+      total /= 10;
+      total += baseOperatingCost;
       return total;
    }
    
-   public boolean addPatient(Patient p){
-      if(numPatient < maxPatient){
-         patientList.add(p);
-         numPatient++;
-         return true;
-         //true if capacity
-      }
-      return false;
-      //false if full
-   }
-   
-   public boolean removePatient(String id){
-      for(int i = 0; i < numPatient; i++){
-         if(id == patientList.get(i).getName()){
-            patientList.remove(i);
-            numPatient--;
-            return true;
-            //return true if id matches an object
+   public boolean addEquipment(String name, int num){
+      if(this.totalEquipment()<maxEquipment){
+         for(int i = 0; i < numEquipment; i++){
+            if(equipmentList.get(i).getName() == name){
+               equipmentList.get(i).setQuantity(equipmentList.get(i).getQuantity() + num);
+               return true;
+               //return true if equipment was added to existing object within array
+            } 
          }
+         System.out.println("Enter in maintenance cost of new equipment: ");
+         double cost = sc.nextInt();
+         equipmentList.add(new Equipment(this,name,num,cost));
+         return true;
+         //or, return true if new equipment was made and added to array
       }
       return false;
-      //return false if no matching id found
    }
-   
+
    public boolean addEquipment(Equipment e, int num){
       if(this.totalEquipment()<maxEquipment){
          for(int i = 0; i < numEquipment; i++){
@@ -50,18 +49,30 @@ public class ICU extends Ward{
             } 
          }
          equipmentList.add(new Equipment(this,e.getName(),num,e.getMaintenanceCost()));
-         return true;
          //or, return true if new equipment was made and added to array
       }
       return false;
    }
    
-   public boolean removeEquipment(Storage s, Equipment e, int num){
+   public boolean removeEquipment(Equipment e, int num){
       for(int i = 0; i < numEquipment; i++){
          if(equipmentList.get(i).getName() == e.getName()){
             equipmentList.remove(i);
             numEquipment--;
-            s.addEquipment(e, num);
+            return true;
+            //return true if equipment with matching name succesfully REMOVED from array
+         } 
+      }
+      return false;
+      //return false if equipment with name not found
+   }
+
+   public boolean moveEquipment(Ward w, Equipment e, int num){
+      for(int i = 0; i < numEquipment; i++){
+         if(equipmentList.get(i).getName() == e.getName()){
+            equipmentList.remove(i);
+            w.addEquipment(e, num);
+            numEquipment--;
             return true;
             //return true if equipment with matching name succesfully REMOVED from array
          } 
@@ -88,34 +99,12 @@ public class ICU extends Ward{
       return sum;
    }
    
-   public boolean addStaff(Medical m){
-      if(numMedical < maxMedical){
-         medicalList.add(m);
-         numMedical++;
-         return true;
-      }
-      return false;
-   }
-   
-   public boolean removeStaff(String id){
-      for(int i = 0; i < numMedical; i++){
-         if(medicalList.get(i).getEmployeeNum() == id){
-            medicalList.remove(i);
-            numMedical--;
-            return true;
-         }
-      }
-      return false;
-   }
-   
    public boolean determineSuitability(Patient p){
-   //if there are more than 3 severe symptoms, they are suitable
-      if(p.getNumSevere()>3){
-         return true;
-      }
+   //if for some reason they run this on storage, return false
       return false;
    }
+
    public String toString(){
-      return "ICU Ward\nNumber of Staff: " +numMedical+"\nNumber of Patients: "+numPatient+"\nNumber of Equipment: "+this.totalEquipment();
+      return "Equipment Storage\nNumber of Equipment: "+this.totalEquipment();
    }
 }

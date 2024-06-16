@@ -56,11 +56,12 @@ public class Paedology extends Ward{
       return false;
    }
    
-   public boolean removeEquipment(Equipment e, int num){
+   public boolean removeEquipment(Storage s, Equipment e, int num){
       for(int i = 0; i < numEquipment; i++){
          if(equipmentList.get(i).getName() == e.getName()){
             equipmentList.remove(i);
             numEquipment--;
+            s.addEquipment(e, num);
             return true;
             //return true if equipment with matching name succesfully REMOVED from array
          } 
@@ -115,6 +116,6 @@ public class Paedology extends Ward{
       return false;
    }
    public String toString(){
-      return "Paedology Ward\nNumber of Staff: " +numMedical+"\nNumber of Patients: "+numPatient+"\nNumber of Equipment: "+numEquipment;
+      return "Paedology Ward\nNumber of Staff: " +numMedical+"\nNumber of Patients: "+numPatient+"\nNumber of Equipment: "+this.totalEquipment();
    }
 }
