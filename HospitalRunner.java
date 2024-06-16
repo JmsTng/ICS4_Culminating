@@ -41,7 +41,7 @@ public class HospitalRunner {
                         1. Staff
                         2. Patients
                         3. Wards
-                        4. Equipment
+                        4. Cash Flow
                         5. Exit Program""");
                 do {
                     System.out.println("Enter a choice(1-5): ");
@@ -50,13 +50,54 @@ public class HospitalRunner {
                 switch (userInput) {
                     case '1':
                         staff();
+
+                    case '2':
+                        patients();
                 }
 
             }
         }
     }
 
-    public static void patients() {
+
+
+
+
+
+
+    public static void ward() {
+        int match, max;
+        char userInput;
+        Scanner sc = new Scanner (System.in);
+
+        System.out.println(""" 
+                Ward Options:
+                0. Create a Ward
+                1. Delete a Ward
+                2. View Ward Information
+                3. Add Equipment to Ward
+                """);
+        do {
+            System.out.println("Enter a choice(0-3): ");
+            userInput = sc.nextLine().charAt(0);
+        } while (userInput < '0' || userInput > '3');
+
+        switch (userInput) {
+            case '0':
+
+
+        }
+    }
+
+
+
+
+
+
+
+
+
+    public static void patients() { // PATIENT HISTORY ISN'T WORKING //
         String name = "";
         int userChoice = 0, quantity = 0;
 
@@ -72,42 +113,43 @@ public class HospitalRunner {
             System.out.println("""
                         
                         
-                    Staff Options:\s
-                    1. Search for Patient
-                    2. Sort Patient List
-                    3. Admit patient
-                    4. Discharge patient
-                    5. Assign Doctor                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             \s
-                    6. Access Patient History
-                    7. Change Patient History
+                    Patient Options:\s
+                    0. Search for Patient
+                    1. Sort Patient List
+                    2. Admit patient
+                    3. Discharge patient
+                    4. Assign Doctor                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             \s
+                    5. View Patient History
+                    6. Change Patient History
+                    7. Assign to Ward
                     8. Exit Patient
                     9. Exit Program""");
             do {
-                System.out.println("Enter a choice(1-9): ");
+                System.out.println("Enter a choice(0-9): ");
                 userInput = sc.nextLine().charAt(0);
-            } while (userInput < '1' || userInput > '9');
+            } while (userInput < '0' || userInput > '9');
 
             switch (userInput) {
-                case '1':
+                case '0':
                     patients = hospital.searchPatient();
                     for (Patient admitted : patients) {
                         System.out.println(admitted);
                         System.out.println();
                     }
 
-                case '2':
+                case '1':
                     patientList = hospital.sortPatient();
                     for (Patient admitted : patientList) {
                         System.out.println(admitted);
                         System.out.println();
                     }
 
-                case '3':
+                case '2':
                     System.out.println("Name: ");
                     name = sc.nextLine();
                     hospital.addPatient(name);
 
-                case '4':
+                case '3':
                     int num = 0;
                     patients = hospital.searchPatient();
                     for (Patient admitted : patients) {
@@ -128,7 +170,7 @@ public class HospitalRunner {
 
                     hospital.removePatient(patients.get(userChoice).getId());
 
-                case '5': // CHECK FOR IF IN SAME WARD?
+                case '4': // CHECK FOR IF IN SAME WARD?
                     int number = 0;
                     Patient p;
                     patients = hospital.searchPatient();
@@ -177,8 +219,49 @@ public class HospitalRunner {
                         System.out.println("Staff member has been assigned!");
                     else System.out.println("Staff member is unavailable!");
 
-                case '6':
+                case '5':
+                    int nums = 0;
+                    patients = hospital.searchPatient();
+                    for (Patient admitted : patients) {
+                        System.out.println(nums + ". " + admitted.getName() + "\n\tEmployee Number:" + admitted.getId());
+                        nums++;
+                    }
 
+                    do {
+                        System.out.println("Enter a choice: ");
+                        try {
+                            userChoice = Integer.parseInt(sc.nextLine());
+                            cont = true;
+                        } catch (NumberFormatException e) {
+                            cont = false;
+                        }
+                    } while (!cont && userChoice < patients.size());
+                    cont = true;
+
+                    patients.get(userChoice).
+
+                case '6':
+                    int numb = 0;
+                    patients = hospital.searchPatient();
+                    for (Patient admitted : patients) {
+                        System.out.println(numb + ". " + admitted.getName() + "\n\tEmployee Number:" + admitted.getId());
+                        numb++;
+                    }
+
+                    do {
+                        System.out.println("Enter a choice: ");
+                        try {
+                            userChoice = Integer.parseInt(sc.nextLine());
+                            cont = true;
+                        } catch (NumberFormatException e) {
+                            cont = false;
+                        }
+                    } while (!cont && userChoice < patients.size());
+                    cont = true;
+
+                case '7':
+                    int selection = 0;
+                    for (Ward wards: hospital.)
 
                 case '8':
                     cont = false;
@@ -189,6 +272,14 @@ public class HospitalRunner {
             }
         }
     }
+
+
+
+
+
+
+
+
 
     public static void staff() {
         String name = "";
@@ -206,34 +297,35 @@ public class HospitalRunner {
                         
                         
                     Staff Options:\s
-                    1. Search for Staff member
-                    2. Sort Staff List
-                    3. Hire staff member
-                    4. Fire staff member
-                    5. Staff uses equipment
+                    0. Search for Staff member
+                    1. Sort Staff List
+                    2. Hire staff member
+                    3. Fire staff member
+                    4. Staff uses equipment
+                    5. Send to Ward
                     6. Exit Staff
                     7. Exit Program""");
             do {
-                System.out.println("Enter a choice(1-7): ");
+                System.out.println("Enter a choice(0-7): ");
                 userInput = sc.nextLine().charAt(0);
-            } while (userInput < '1' || userInput > '7');
+            } while (userInput < '0' || userInput > '7');
 
             switch (userInput) {
-                case '1':
+                case '0':
                     staff = hospital.searchStaff();
                     for (Staff member : staff) {
                         System.out.println(member);
                         System.out.println();
                     }
 
-                case '2':
+                case '1':
                     staffList = hospital.sortStaff();
                     for (Staff member : staffList) {
                         System.out.println(member);
                         System.out.println();
                     }
 
-                case '3':
+                case '2':
                     System.out.println("Name: ");
                     name = sc.nextLine();
                     System.out.println("Salary: ");
@@ -242,7 +334,7 @@ public class HospitalRunner {
                     overtimesalary = sc.nextDouble();
                     hospital.addStaff(name, salary, overtimesalary);
 
-                case '4':
+                case '3':
                     int num = 0;
                     staff = hospital.searchStaff();
                     for (Staff member : staff) {
@@ -263,7 +355,7 @@ public class HospitalRunner {
 
                     hospital.removeStaff(staff.get(userChoice).getEmployeeNum());
 
-                case '5':
+                case '4':
                     int number = 0;
                     staff = hospital.searchStaff();
                     ArrayList<Medical> medics = null;
@@ -304,6 +396,9 @@ public class HospitalRunner {
                     if (medics.get(userChoice).useEquipment(name, quantity))
                         System.out.println("Equipment is available and has been marked!");
                     else System.out.println("Equipment is unavailable!");
+
+                case '5':
+
 
                 case '6':
                     cont = false;
