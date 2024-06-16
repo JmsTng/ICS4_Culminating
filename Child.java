@@ -33,6 +33,10 @@ public class Child extends Patient {
         return super.getTriage() + BASE_TRIAGE;
     }
 
+    /**
+     * Calculates the total cost for the patient's treatment.
+     * @return the total cost
+     */
     public double bill() {
         double cost = BASE_COST;
         for (Symptom s : this.getSymptoms()) {
