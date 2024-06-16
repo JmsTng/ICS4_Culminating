@@ -18,12 +18,11 @@ public class Medical extends Staff {
      * doctor.
      *
      * @param name             The name of the employee housed in a string
-     * @param employeeNum      Employee number that is unique to each separate employee
      * @param salary           Used to calculate cost to hospital
      * @param overtimeSalary   Used to calculate cost to hospital
      */
-    public Medical (String name, String employeeNum, double salary, double overtimeSalary) {
-        super (name, employeeNum, salary, overtimeSalary);
+    public Medical (String name, double salary, double overtimeSalary) {
+        super (name, salary, overtimeSalary);
         patientNum = 0;
         patients = new ArrayList<Patient>();
     }
@@ -46,7 +45,7 @@ public class Medical extends Staff {
      * @return    Whether the patient was added
      */
     public boolean addPatient (Patient p ) {
-        if (patients.contains(p)) return false;
+        if (patients.contains(p) || p.getWard() != ward) return false;
         if ((patientNum + 1) < patientCap) {
             patients.add(p);
             return true;
@@ -66,7 +65,7 @@ public class Medical extends Staff {
         if ((patientNum + 1) < patientCap) {
             for (Patient patient : patientList) {
                 if (patient.getId().equals(id)) {
-                    if (patients.contains(patient)) return false;
+                    if (patients.contains(patient) || patient.getWard() != ward) return false;
                     patients.add(patient);
                     patientNum++;
                     return true;

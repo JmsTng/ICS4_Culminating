@@ -14,14 +14,13 @@ public class Doctor extends Medical {
     /**
      * Creates a new doctor staff member.
      *
+     * @param speciality       Speciality of the Doctor, used in assigning staff
      * @param name             The name of the employee housed in a string
-     * @param employeeNum      Employee number that is unique to each separate employee
      * @param salary           Used to calculate cost to hospital
      * @param overtimeSalary   Used to calculate cost to hospital
-     * @param speciality       Speciality of the Doctor, used in assigning staff
      */
-    public Doctor (String name, String employeeNum, double salary, double overtimeSalary, String speciality) {
-        super (name, employeeNum, salary, 0);
+    public Doctor (String speciality, String name, double salary, double overtimeSalary) {
+        super (name, salary, 0);
         this.speciality = speciality;
     }
 

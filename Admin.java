@@ -35,12 +35,11 @@ class Admin extends Staff {
      * that is unique to each admin as a verification step.
      *
      * @param name         The name of the employee housed in a string
-     * @param num          Employee number that is unique to each separate employee
      * @param sal          Used to calculate cost to hospital
      * @param overTimeSal  Used to calculate cost to hospital
      * */
-    public Admin(String name, String num, double sal, double overTimeSal) {
-        super(name, num, sal, overTimeSal);
+    public Admin(String name, double sal, double overTimeSal) {
+        super(name, sal, overTimeSal);
         Scanner sc = new Scanner(System.in);
         userName = getEmployeeNum();
         System.out.println("Password: ");

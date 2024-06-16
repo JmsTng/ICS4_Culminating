@@ -1,7 +1,6 @@
 import Staff.*;
 import java.util.Scanner;
 import java.util.ArrayList;
-
 public class Hospital {
    private String name;
    private double budget;

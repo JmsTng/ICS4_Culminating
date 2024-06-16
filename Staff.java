@@ -6,6 +6,7 @@
 public class Staff {
 
     /*FIELDS*/
+    private static int numCount;
     private String name;
     private String employeeNum;
     private double salary;
@@ -69,17 +70,17 @@ public class Staff {
      * employee number, salary, as well as an overtime salary.
      *
      * @param name             The name of the employee housed in a string
-     * @param employeeNum      Employee number that is unique to each separate employee
      * @param salary           Used to calculate cost to hospital
      * @param overtimeSalary   Used to calculate cost to hospital
      * */
-    public Staff(String name, String employeeNum, double salary, double overtimeSalary) {
+    public Staff(String name, double salary, double overtimeSalary) {
         this.name = name;
-        this.employeeNum = employeeNum;
         this.salary = salary;
         this.overtimeSalary = overtimeSalary;
         this.hoursWorked = 0;
         this.overtimeWorked = 0;
+        employeeNum = String.format("%5d", numCount);
+        numCount++;
     }
 
     /*METHODS*/
