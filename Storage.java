@@ -100,7 +100,7 @@ public class Storage extends Ward{
    }
    
    public boolean determineSuitability(Patient p){
-   //if for some reason they run this on storage, return false
+   //if for some reason they run this on Storage, return false
       return false;
    }
 

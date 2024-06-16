@@ -110,7 +110,7 @@ public class Emergency extends Ward{
    
    public boolean determineSuitability(Patient p){
    //if triage is greater than or equal to 5, they are suitable for this ward
-      if(p.getTriage()>5){
+      if(p.getTriage()>=5){
          return true;
       }
       return false;

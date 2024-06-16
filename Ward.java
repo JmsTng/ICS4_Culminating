@@ -14,6 +14,7 @@ public class Ward{
    
    
    public Ward(){
+      //constructor to set num of counter fields, as well as cost
       this.numEquipment = 0;
       this.numPatient = 0;
       this.numMedical = 0;
@@ -21,6 +22,7 @@ public class Ward{
    }
    
    public double getOperatingCost(){
+      //takes base cost, and adds Equipment cost
       double total = 0;
       total += baseOperatingCost;
       for(int i = 0; i < numEquipment; i++){
@@ -30,6 +32,7 @@ public class Ward{
    }
    
    public boolean addPatient(Patient p){
+      //adds Patients up to cap
       if(numPatient < maxPatient){
          patientList.add(p);
          numPatient++;
@@ -41,6 +44,7 @@ public class Ward{
    }
    
    public boolean removePatient(String id){
+      //searches for Patient id, removes if id found
       for(int i = 0; i < numPatient; i++){
          if(id == patientList.get(i).getName()){
             patientList.remove(i);
@@ -54,6 +58,7 @@ public class Ward{
    }
    
    public boolean addEquipment(Equipment e, int num){
+      //adds Equipment to existing Equipment object, or creates new Equipment object
       if(this.totalEquipment()<maxEquipment){
          for(int i = 0; i < numEquipment; i++){
             if(equipmentList.get(i).getName() == e.getName()){
@@ -70,6 +75,7 @@ public class Ward{
    }
    
    public boolean removeEquipment(Storage s, Equipment e, int num){
+      //searches Equipment name, removes if found
       for(int i = 0; i < numEquipment; i++){
          if(equipmentList.get(i).getName() == e.getName()){
             equipmentList.remove(i);
@@ -84,6 +90,7 @@ public class Ward{
    }
    
    public Equipment getEquipment(String name){
+      //find if Equipment exists within Ward
       for(int i = 0; i < numEquipment; i++){
          if(equipmentList.get(i).getName() == name){
             return equipmentList.get(i);
@@ -94,6 +101,7 @@ public class Ward{
    }
    
    public int totalEquipment(){
+      //calculates and returns total quantity of Equipment in Ward
       int sum = 0;
       for(int i = 0; i < numEquipment; i++){
          sum+=equipmentList.get(i).getQuantity();
@@ -102,6 +110,7 @@ public class Ward{
    }
    
    public boolean addStaff(Medical m){
+      //adds Medical if space
       if(numMedical < maxMedical){
          medicalList.add(m);
          numMedical++;
@@ -111,6 +120,7 @@ public class Ward{
    }
    
    public boolean removeStaff(String id){
+      //searches by Medical id to remove 
       for(int i = 0; i < numMedical; i++){
          if(medicalList.get(i).getEmployeeNum() == id){
             medicalList.remove(i);
