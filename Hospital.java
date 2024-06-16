@@ -1,7 +1,13 @@
 import Staff.*;
+import Patient.*;
+import Ward.*;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.io.BufferedWriter;
+
 public class Hospital {
+
+   //FIELDS
    private String name;
    private double budget;
    private int numWards;
@@ -14,7 +20,8 @@ public class Hospital {
    
    private Scanner sc;
 
-   public Hospital(String name, double budget, int maxWards, int patientCap, int staffCap) {
+   //CONSTRUCTOR
+   public Hospital(String name, double budget) {
       this.name = name;
       this.budget = budget;
       this.numWards = 0;
@@ -24,8 +31,12 @@ public class Hospital {
       this.sc = new Scanner(System.in);
    }
 
+   //Creates new ward in ward array list
+   //Returns true if successful, otherwise returns false
    public boolean createWard(int match, int max) {
-      System.out.println("Select ward type to add:\n(1) ICU\n(2) Oncology\n(3) Emergency\n(4) Paediology\n(5) Other");
+      //Prompts user for type of ward
+      System.out.println("Select ward type to add:\n(1) ICU\n(2) Oncology\n(3) Emergency\n(4) Paedology\n(5) Other");
+      //Switch case :(
       switch (sc.nextInt()) {
          case 1 -> {
             wards.add(new ICU(match, max));
@@ -37,7 +48,7 @@ public class Hospital {
             wards.add(new Emergency(match, max));
          }
          case 4 -> {
-            wards.add(new Paediology(match, max));
+            wards.add(new Paedology(match, max));
          }
          case 5 -> {
             wards.add(new Ward(match, max));
@@ -50,7 +61,10 @@ public class Hospital {
       return true;
    }
    
+   //Removes ward from ward array list
+   //Returns true if successful, otherwise returns false
    public boolean destroyWard(int index) {
+      //Checks if index is in array list
        if (index < numWards){
          numWards--;
          wards.remove(index);
@@ -60,20 +74,26 @@ public class Hospital {
        }
    }
    
-   public boolean addStaff(String name, String id, double salary, double overtime) {
+   //Creates new staff in staff array list
+   //Returns true if successful, otherwise returns false
+   public boolean addStaff(String name, double salary, double overtime) {
+      //Prompt user for type of staff
       System.out.println("Select staff to add:\n(1) Doctor\n(2) Medical\n(3) Admin\n(4) Other");
       switch (sc.nextInt()) {
          case 1 -> {
-            staff.add(new Doctor(name, id, salary, overtime));
+            //Prompts for specialty if doctor is selected
+            System.out.println("Enter the doctor's specialty:\n");
+            String specialty = sc.nextLine();
+            staff.add(new Doctor(specialty, name, salary, overtime));
          }
          case 2 -> {
-            staff.add(new Medical(name, id, salary, overtime));
+            staff.add(new Medical(name, salary, overtime));
          }
          case 3 -> {
-            staff.add(new Admin(name, id, salary, overtime));
+            staff.add(new Admin(name, salary, overtime));
          }
          case 4 -> {
-            staff.add(new Staff(name, id, salary, overtime));
+            staff.add(new Staff(name, salary, overtime));
          }
          default -> {
             return false;
@@ -83,21 +103,47 @@ public class Hospital {
       return true;
    }
    
-   public boolean removeStaff(int index) {
-       if (index < numStaff){
-         numStaff--;
-         staff.remove(index);
-         return true;
-       }else{
-         return false;
+   //Removes staff from staff array list
+   //Returns true if successful, otherwise returns false
+   public boolean removeStaff(String id) {
+      //Checks if any staff have a matching employee number
+       for (int i = 0; i < staff.size(); i++){
+         if (staff.get(i).getEmployeeNum.equals(id)){
+            staff.remove(i);
+            return true;
+         }
        }
+       return false;
    }
    
-   public void assignEquipment() {
-   
+   //Adds or Removes equipment from a ward
+   //Returns true if successful, otherwise returns false
+   public boolean assignEquipment(Ward w) {
+      //Prompts user for add or remove
+      System.out.println("Select an option:\n(1) Add equipment\n(2) Remove equipment");
+      int select = sc.nextInt();
+      if (select <= 2 && select >= 1){
+         //Prompts user for type of equipment and amount
+         System.out.println("Enter an equipment:");
+         String type = sc.nextLine();
+         System.out.println("Enter an amount:");
+         int amount = sc.nextInt();
+         //Runs wards methods for adding or removing equipment
+         if (select == 1){
+            w.addEquipment(type, amount);
+         }else{
+            w.removeEquipment(type, amount);
+         }
+         return true;
+      }else{
+         return false
+      }
    }
    
-   public void addPatient(String name) {
+   //Adds patient to patient array list
+   //Returns true if successful, otherwise returns false
+   public boolean addPatient(String name) {
+      //Prompts user for type of patient
       System.out.println("Select patient type to add:\n(1) Normal\n(2) Child");
       switch (sc.nextInt()) {
          case 1 -> {
@@ -114,20 +160,27 @@ public class Hospital {
       return true;
    }
    
-   public void removePatient(int index) {
-      if (index < numPatients){
-         for (int i = index; i < numPatients; i++){
-            patients[i] = patients[i+1];
+   //Removes patient from patient array list
+   //Returns true if successful, otherwise returns false
+   public void removePatient(String id) {
+      //Checks if any patients have a matching id
+      for (int i = 0; i < patients.size(); i++){
+         if (patients.get(i).getId.equals(id)){
+            patients.remove(i);
+            return true;
          }
-         numPatients--;
-         patients[numPatients] = null;
-         return true;
-      }else{
-         return false;
-      }
+       }
+       return false;
    }
    
-   public Arraylist<Patient> searchPatient() {
+   public Ward getWard(int index){
+      return ward.get(i);
+   }
+   
+   //Returns array list of patient containing all matches of search for patient
+   //Returns null if bad input
+   public ArrayList<Patient> searchPatient() {
+      //Prompts user for field
       System.out.println("Select field to search by:\n(1) Name\n(2) ID");
       int searchType = sc.nextInt();
       if (searchType >= 1 && searchType <= 2){
@@ -153,7 +206,7 @@ public class Hospital {
       }
    }
    
-   public Arraylist<Staff> searchStaff() {
+   public ArrayList<Staff> searchStaff() {
       System.out.println("Select field to search by:\n(1) Name\n(2) Employee Number");
       int searchType = sc.nextInt();
       if (searchType >= 1 && searchType <= 2){
@@ -266,6 +319,22 @@ public class Hospital {
    }
    
    public void exportStaff() {
-      ...
+      try{
+         BufferedWriter write = new BufferedWriter(new FileWriter(dir + path, true));
+         for (int i = 0; i < staff.size(); i++){
+            Staff temp = staff.get(i);
+            if (temp instanceof Doctor){
+               write.write("d\n" + temp.getSpecialty());
+            }else if (temp instanceof Medical){
+               write.write("m");
+            }else if (temp instanceof Admin){
+               write.write("a");
+            }else{
+               write.write("s");
+            }
+            write.write(temp.getName() + "\n" + temp.getEmployeeNum + "\n" + temp.getSalary() + "\n" + temp.getOvertimeSalary());
+         }
+      }catch (IOException e){
+      }
    }
 }
