@@ -145,7 +145,7 @@ public class Medical extends Staff {
      * @return   A string with information on the staff member
      */
     public String toString() {
-        return super.toString() + "\nWard: " + _getWardName() + "\nPatients: " + patientNum;
+        return super.toString() + "\nWard: " + getWardName() + "\nPatients: " + patientNum;
     }
 
     /**
@@ -153,7 +153,7 @@ public class Medical extends Staff {
      *
      * @return   Type of ward
      */
-    private String _getWardName() {
+    public String getWardName() {
         String toReturn;
         if (ward instanceof Emergency) toReturn = "Oncology";
         else if (ward instanceof ICU) toReturn = "ICU";
