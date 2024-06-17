@@ -211,7 +211,7 @@ public class Hospital {
    //Returns null if bad input
    public ArrayList<Patient> searchPatient() {
       //Prompts user for field to search by
-      System.out.println("Select field to search by:\n(1) Name\n(2) ID");
+      System.out.println("Select field to search by:\n(1) Name\n(2) Triage");
       try{
          int searchType = sc.nextInt();
          if (searchType >= 1 && searchType <= 2){
@@ -236,9 +236,9 @@ public class Hospital {
    //Private method to run different patient compare methods
    private boolean pSearch(int searchType, String search, int index) {
       if (searchType == 1){
-         return patients.get(index).compareToName(search);
+         return patients.get(index).matchName(search);
       }else{
-         return patients.get(index).compareToId(search);
+         return patients.get(index).matchTriage(search);
       }
    }
    
@@ -281,7 +281,7 @@ public class Hospital {
    //Returns null if bad input
    public Patient[] sortPatient() {
       //Prompts user for field to sort by
-      System.out.println("Select field to sort by:\n(1) Name\n(2) Triage");
+      System.out.println("Select field to sort by:\n(1) Name\n(2) Id");
       try{
          int type = sc.nextInt();
          if (type >= 1 && type <= 2){
@@ -319,7 +319,7 @@ public class Hospital {
       if (type == 1){
          return patients.get(index).compareName(patients.get(other));
       }else{
-         return patients.get(index).compareTriage(patients.get(other));
+         return patients.get(index).compareId(patients.get(other));
       }
    }
    
