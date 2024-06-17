@@ -32,7 +32,7 @@ public class Hospital {
       this.budget = budget;
       this.numWards = 0;
       this.numPatients = 0;
-      this.numStaff = 0;
+      this.numStaff = 1;
       
       this.file = "staff.txt";
       this.storage = new Storage();
@@ -95,20 +95,20 @@ public class Hospital {
       //Prompt user for type of staff
       System.out.println("Select staff to add:\n(1) Doctor\n(2) Medical\n(3) Admin\n(4) Other");
       try{
-         switch (sc.nextInt()) {
-            case 1 -> {
+         switch (sc.nextLine()) {
+            case "1" -> {
                //Prompts for specialty if doctor is selected
                System.out.println("Enter the doctor's specialty:\n");
                String specialty = sc.nextLine();
                staff.add(new Doctor(specialty, name, salary, overtime));
             }
-            case 2 -> {
+            case "2" -> {
                staff.add(new Medical(name, salary, overtime));
             }
-            case 3 -> {
+            case "3" -> {
                staff.add(new Admin(name, salary, overtime));
             }
-            case 4 -> {
+            case "4" -> {
                staff.add(new Staff(name, salary, overtime));
             }
             default -> {
@@ -116,6 +116,7 @@ public class Hospital {
             }
          }
          numStaff++;
+         System.out.println(staff.size()+"\n"+numStaff);
          return true;
       }catch (Exception e){
          return false;
@@ -257,7 +258,8 @@ public class Hospital {
       try{
          int searchType = sc.nextInt();
          sc.nextLine();
-         if (searchType >= 1 && searchType <= 2){
+         System.out.println((searchType == 1 || searchType == 2));
+         if (searchType == 1 || searchType == 2){
             System.out.print("Enter search query: ");
             String search = sc.nextLine();
             //Creates array list of staff and searches through entire staff list for matches
@@ -265,6 +267,8 @@ public class Hospital {
             for (int i = 0; i < numStaff; i++){
                if (sSearch(searchType, search, i)){
                   staffList.add(staff.get(i));
+               }else{
+                  System.out.println("hi");
                }
             }
             return staffList;
@@ -281,7 +285,7 @@ public class Hospital {
       if (searchType == 1){
          return staff.get(index).matchName(search);
       }else{
-         return staff.get(index).matchName(search);
+         return staff.get(index).matchEmployeeNum(search);
       }
    }
    

@@ -131,11 +131,11 @@ public class Staff {
      * */
     public boolean matchName(String name) {
         if (name == null) return false;
-
-        for (int i = 0; i < name.length(); i++) {
-            if (this.name.charAt(i) != name.charAt(i)) return false;
-        }
-        return true;
+        // for (int i = 0; i < name.length(); i++) {
+        //    if (this.name.charAt(i) != name.charAt(i)) return false;
+        // }
+        // return true;
+        return this.name.contains(name);
     }
 
 
