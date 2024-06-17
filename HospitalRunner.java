@@ -22,8 +22,6 @@ public class HospitalRunner {
                 hospital = new Hospital(name, budget);
             }
 
-            staff();
-
             System.out.println("\nPlease Login:");
 
             verified = login();
