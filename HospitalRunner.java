@@ -46,6 +46,15 @@ public class HospitalRunner {
 
                     case '2':
                         patients();
+                        
+                    case '3':
+                        ward();
+                        
+                    case '4':
+                        System.out.println(name + " hospital has an income of $" + hospital.calculateProfit());
+                        
+                    case '5':
+                        exit = true;
                 }
 
             }
@@ -60,25 +69,53 @@ public class HospitalRunner {
 
     public static void ward() {
         char userInput;
+        int index;
         Scanner sc = new Scanner (System.in);
+        ArrayList<Ward> wards = hospital.getWard();
 
-        System.out.println(""" 
-                
-                
-                Ward Options:
+        System.out.println("""
+                        
+                        
+                Ward Options:\s
                 0. Create a Ward
                 1. Delete a Ward
                 2. View Ward Information
-                3. Add Equipment to Ward
+                3. Add Equipment to Storage
+                4. Move Equipment between Wards
                 4. Change operating cost
-                """);
+                5. Exit Ward
+                6. Exit Program""");
         do {
-            System.out.println("Enter a choice(0-3): ");
+            System.out.println("Enter a choice(0-4): ");
             userInput = sc.nextLine().charAt(0);
-        } while (userInput < '0' || userInput > '3');
+        } while (userInput <= '0' || userInput >= '6');
 
         switch (userInput) {
             case '0':
+               hospital.createWard();
+            case '1':
+               System.out.println("Index of ward to remove:");
+               index = sc.nextInt();
+               hospital.destroyWard(index);
+            case '2':
+               System.out.println("Storage:\n" + hospital.getStorage() + "\nOther Wards:");
+               for (int i = 0; i < wards.size(); i++){
+                  System.out.println(i + " " + wards.get(i));
+               }
+            case '3':
+               if (!hospital.assignEquipment()){
+                  System.out.println("Failed to complete command");
+               }
+            case '4':
+               
+            case '5':
+               
+            case '6':
+                    cont = false;
+
+            case '7':
+                    cont = false;
+                    exit = true;
 
 
         }
