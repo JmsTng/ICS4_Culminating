@@ -223,6 +223,7 @@ public class Hospital {
         System.out.println("Select field to search by:\n(1) Name\n(2) ID");
         try {
             int searchType = sc.nextInt();
+            sc.nextLine();
             if (searchType >= 1 && searchType <= 2) {
                 System.out.print("Enter search query: ");
                 String search = sc.nextLine();

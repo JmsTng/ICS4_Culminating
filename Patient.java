@@ -128,6 +128,15 @@ public class Patient {
     }
 
     /**
+     * String representation of a Patient object.
+     *
+     * @return the name and id of a Patient
+     */
+    public String toString() {
+        return String.format("%s (%s)", this.name, this.id);
+    }
+
+    /**
      * Add a Symptom with a description to the Patient's list of Symptoms.
      *
      * @param severity    determine which level of severity
