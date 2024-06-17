@@ -42,7 +42,7 @@ class Admin extends Staff {
         super(name, sal, overTimeSal);
         Scanner sc = new Scanner(System.in);
         userName = getEmployeeNum();
-        System.out.println("Password: ");
+        System.out.print("Password: ");
         password = sc.nextLine();
     }
 

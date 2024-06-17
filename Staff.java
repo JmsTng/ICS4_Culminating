@@ -81,7 +81,7 @@ public class Staff {
         this.overtimeSalary = overtimeSalary;
         this.hoursWorked = 0;
         this.overtimeWorked = 0;
-        employeeNum = String.format("%5d", numCount);
+        employeeNum = "" + numCount;
         numCount++;
     }
 
@@ -227,26 +227,31 @@ public class Staff {
                     System.out.println("Old Name: " + name);
                     System.out.print("New Name: ");
                     setName(sc.nextLine());
+                    break;
 
                 case '1':
                     System.out.printf("Old Salary: %.2f\n", salary);
                     System.out.print("New Salary: ");
                     setSalary(sc.nextDouble());
+                    break;
 
                 case '2':
                     System.out.printf("Old Overtime Salary: %.2f\n", overtimeSalary);
                     System.out.print("New Overtime Salary: ");
                     setOvertimeSalary(sc.nextDouble());
+                    break;
 
                 case '3':
                     System.out.printf("Hours Worked: %.2f", hoursWorked);
                     System.out.print("New Hours: ");
                     enterHours(sc.nextDouble());
+                    break;
 
                 case '4':
                     System.out.printf("Overtime Hours Worked: %.2f", overtimeWorked);
                     System.out.print("New Overtime Hours: ");
                     enterOverTimeHours(sc.nextDouble());
+                    break;
 
                 case '5':
                     if (this instanceof Doctor) {
@@ -255,9 +260,11 @@ public class Staff {
                         ((Doctor) this).setSpeciality(sc.nextLine());
                     }
                     else done = true;
+                    break;
 
                 default:
                     done = true;
+                    break;
             }
         }
     }

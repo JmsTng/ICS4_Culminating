@@ -5,7 +5,7 @@ public class HospitalRunner {
     static boolean exit = false;
     public static void main(String[] args) {
         String name = "";
-        char userInput;
+        char userInput = '0';
         double budget;
         boolean verified;
         Scanner sc = new Scanner(System.in);
@@ -15,12 +15,16 @@ public class HospitalRunner {
 
             if (hospital == null) {
                 System.out.println("HOSPITAL PROPERTIES    ");
-                System.out.println("Name:                  ");
+                System.out.print("Name: ");
                 name = sc.nextLine();
-                System.out.println("Budget:                ");
+                System.out.print("Budget: ");
                 budget = Double.parseDouble(sc.nextLine());
                 hospital = new Hospital(name, budget);
             }
+
+            staff();
+
+            System.out.println("\nPlease Login:");
 
             verified = login();
 
@@ -42,20 +46,24 @@ public class HospitalRunner {
                 switch (userInput) {
                     case '1':
                         staff();
+                        break;
 
                     case '2':
                         patients();
-                        
+                        break;
+
                     case '3':
                         ward();
+                        break;
                         
                     case '4':
                         System.out.println(name + " hospital has an income of $" + hospital.calculateProfit());
+                        break;
                         
                     case '5':
                         exit = true;
+                        break;
                 }
-
             }
         }
     }
@@ -95,24 +103,30 @@ public class HospitalRunner {
 
                 case '0':
                     hospital.createWard();
+                    break;
 
                 case '1':
                     System.out.println("Index of ward to remove:");
                     index = sc.nextInt();
                     hospital.destroyWard(index);
+                    break;
 
                 case '2':
                     System.out.println("Storage:\n" + hospital.getStorage() + "\nOther Wards:");
                     for (int i = 0; i < wards.size(); i++) {
                         System.out.println(i + " " + wards.get(i));
                     }
+                    break;
 
+                    /*
                 case '3':
                     if (!hospital.assignEquipment()) {
                         System.out.println("Failed to complete command");
                     } else{
                         System.out.println("Equipment successfully assigned");
                     }
+
+                     */
 
                 case '4':
                     int num = 0, from, to, quantity;
@@ -148,15 +162,16 @@ public class HospitalRunner {
                         to = sc.nextInt();
                     } while (to < 0 || to > wards.size());
 
-                    applicable.get(from).
+                    //applicable.get(from).
+                    break;
 
 
                 case '5':
-                    int num = 0;
+                    int num1 = 0;
                     double cost;
                     for (Ward ward: wards){
-                        System.out.println(num + ". " + ward);
-                        num++;
+                        System.out.println(num1 + ". " + ward);
+                        num1++;
                     }
                     do {
                         System.out.print("Enter a Choice: ");
@@ -165,15 +180,16 @@ public class HospitalRunner {
                     System.out.println("Old Operating Cost: " + wards.get(index).getBaseOperatingCost());
                     System.out.print("New Operating cost: ");
                     wards.get(index).setBaseOperatingCost(sc.nextDouble());
+                    break;
 
                 case '6':
                     cont = false;
+                    break;
 
                 case '7':
                     cont = false;
                     exit = true;
-
-
+                    break;
             }
         }
     }
@@ -226,6 +242,7 @@ public class HospitalRunner {
                         System.out.println(admitted);
                         System.out.println();
                     }
+                    break;
 
                 case '1':
                     patientList = hospital.sortPatient();
@@ -233,11 +250,13 @@ public class HospitalRunner {
                         System.out.println(admitted);
                         System.out.println();
                     }
+                    break;
 
                 case '2':
                     System.out.print("Name: ");
                     name = sc.nextLine();
                     hospital.addPatient(name);
+                    break;
 
                 case '3':
                     int num = 0;
@@ -259,6 +278,7 @@ public class HospitalRunner {
                     cont = true;
 
                     hospital.removePatient(patients.get(userChoice).getId());
+                    break;
 
                 case '4': // CHECK FOR IF IN SAME WARD?
                     int number = 0;
@@ -308,6 +328,7 @@ public class HospitalRunner {
                     if (p.assignMedicalStaff(medicsAvailable.get(userChoice)))
                         System.out.println("Staff member has been assigned!");
                     else System.out.println("Staff member is unavailable!");
+                    break;
 
                 case '5':
                     int nums = 0;
@@ -328,7 +349,8 @@ public class HospitalRunner {
                     } while (!cont && userChoice < patients.size());
                     cont = true;
 
-                    patients.get(userChoice).
+                    //patients.get(userChoice).
+                    break;
 
                 case '6':
                     int numb = 0;
@@ -348,17 +370,21 @@ public class HospitalRunner {
                         }
                     } while (!cont && userChoice < patients.size());
                     cont = true;
+                    break;
 
                 case '7':
                     int selection = 0;
                     for (Ward ward: wards);
+                    break;
 
                 case '8':
                     cont = false;
+                    break;
 
                 case '9':
                     cont = false;
                     exit = true;
+                    break;
             }
         }
     }
@@ -383,6 +409,8 @@ public class HospitalRunner {
         Scanner sc = new Scanner(System.in);
 
         while (cont) {
+            System.out.print("Click 'ENTER' to continue: ");
+            sc.nextLine();
             System.out.println("""
                         
                         
@@ -407,6 +435,7 @@ public class HospitalRunner {
                         System.out.println(member);
                         System.out.println();
                     }
+                     break;
 
                 case '1':
                     staffList = hospital.sortStaff();
@@ -414,6 +443,7 @@ public class HospitalRunner {
                         System.out.println(member);
                         System.out.println();
                     }
+                    break;
 
                 case '2':
                     System.out.println("Name: ");
@@ -422,7 +452,8 @@ public class HospitalRunner {
                     salary = sc.nextDouble();
                     System.out.println("Overtime Salary: ");
                     overtimesalary = sc.nextDouble();
-                    hospital.addStaff(name, salary, overtimesalary);
+                    System.out.println(hospital.addStaff(name, salary, overtimesalary));
+                    break;
 
                 case '3':
                     int num = 0;
@@ -444,6 +475,7 @@ public class HospitalRunner {
                     cont = true;
 
                     hospital.removeStaff(staff.get(userChoice).getEmployeeNum());
+                    break;
 
                 case '4':
                     int number = 0;
@@ -486,6 +518,7 @@ public class HospitalRunner {
                     if (medics.get(userChoice).useEquipment(name, quantity))
                         System.out.println("Equipment is available and has been marked!");
                     else System.out.println("Equipment is unavailable!");
+                    break;
 
                 case '5':
                     int num1 = 0;
@@ -507,13 +540,16 @@ public class HospitalRunner {
                     cont = true;
 
                     staff.get(userChoice).updateInformation();
+                    break;
 
                 case '6':
                     cont = false;
+                    break;
 
                 case '7':
                     cont = false;
                     exit = true;
+                    break;
             }
         }
     }
@@ -522,18 +558,18 @@ public class HospitalRunner {
         ArrayList<Staff> staffMembers;
         ArrayList<Admin> administrators = new ArrayList<>();
         boolean cont;
-        int userInput = 0;
+        int userInput = -1;
         Scanner sc = new Scanner(System.in);
-        staffMembers = hospital.searchStaff();
+        staffMembers = hospital.getStaff();
         for (Staff staffMember : staffMembers) {
             if (staffMember instanceof Admin) {
                 administrators.add((Admin) staffMember);
             }
         }
         for (int i = 0; i < administrators.size(); i++) {
-            System.out.println(i +". " + administrators.get(i).getName() + "\n\tEmployee Number: " + administrators.get(i).getEmployeeNum());
+            System.out.println(i +". " + administrators.get(i).getName() + "\tEmployee Number: " + administrators.get(i).getEmployeeNum());
         }
-        System.out.println((administrators.size() + 1) + ". Exit Program");
+        System.out.println(administrators.size() + ". Exit Program");
         do {
             System.out.print("Enter a choice: ");
             try {
@@ -544,7 +580,7 @@ public class HospitalRunner {
             }
         } while (!cont);
 
-        if (userInput > administrators.size()) {
+        if (userInput == administrators.size()) {
             exit = true;
             return false;
         } else {

@@ -1,6 +1,3 @@
-import Staff.*;
-import Patient.*;
-import Ward.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.BufferedWriter;
@@ -25,6 +22,10 @@ public class Hospital {
    private String file;
    private Scanner sc;
 
+   public ArrayList<Staff> getStaff() {
+      return staff;
+   }
+
    //CONSTRUCTOR
    public Hospital(String name, double budget) {
       this.name = name;
@@ -36,6 +37,8 @@ public class Hospital {
       this.file = "staff.txt";
       this.storage = new Storage();
       this.sc = new Scanner(System.in);
+
+      staff.add(new Admin("Default", 1000, 1000));
    }
    
 
@@ -134,6 +137,7 @@ public class Hospital {
    
    //Adds or Removes equipment from a ward
    //Returns true if successful, otherwise returns false
+   /*
    public boolean assignEquipment() {
       //Prompts user for add or remove
       System.out.println("Select an option:\n(1) Add equipment\n(2) Remove equipment");
@@ -159,6 +163,7 @@ public class Hospital {
          return false;
       }
    }
+    */
    
    //Adds patient to patient array list
    //Returns true if successful, otherwise returns false
@@ -206,7 +211,8 @@ public class Hospital {
    public Ward getStorage(){
       return storage;
    }
-   
+
+
    //Returns array list of patient containing all matches of search for patient
    //Returns null if bad input
    public ArrayList<Patient> searchPatient() {
@@ -232,13 +238,14 @@ public class Hospital {
          return null;
       }
    }
-   
+
+
    //Private method to run different patient compare methods
    private boolean pSearch(int searchType, String search, int index) {
       if (searchType == 1){
-         return patients.get(index).compareToName(search);
+         return patients.get(index).matchName(search);
       }else{
-         return patients.get(index).compareToId(search);
+         return patients.get(index).matchId(search);
       }
    }
    
@@ -249,6 +256,7 @@ public class Hospital {
       System.out.println("Select field to search by:\n(1) Name\n(2) Employee Number");
       try{
          int searchType = sc.nextInt();
+         sc.nextLine();
          if (searchType >= 1 && searchType <= 2){
             System.out.print("Enter search query: ");
             String search = sc.nextLine();
@@ -271,9 +279,9 @@ public class Hospital {
    //Private method to run different staff compare methods
    private boolean sSearch(int searchType, String search, int index) {
       if (searchType == 1){
-         return staff.get(index).compareName(search);
+         return staff.get(index).matchName(search);
       }else{
-         return staff.get(index).compareEmployeeNumber(search);
+         return staff.get(index).matchName(search);
       }
    }
    
@@ -281,7 +289,7 @@ public class Hospital {
    //Returns null if bad input
    public Patient[] sortPatient() {
       //Prompts user for field to sort by
-      System.out.println("Select field to sort by:\n(1) Name\n(2) Triage");
+      System.out.println("Select field to sort by:\n(1) Name\n(2) id");
       try{
          int type = sc.nextInt();
          if (type >= 1 && type <= 2){
@@ -317,9 +325,9 @@ public class Hospital {
    //Private method to run different patient compare methods
    private int pSort(int type, int index, int other) {
       if (type == 1){
-         return patients.get(index).compareName(patients.get(other));
+         return patients.get(index).compareToName(patients.get(other));
       }else{
-         return patients.get(index).compareTriage(patients.get(other));
+         return patients.get(index).compareToId(patients.get(other));
       }
    }
    
@@ -361,7 +369,7 @@ public class Hospital {
    }
    
    //Private method to run different staff compare methods
-   private int sSort(int type, int index, int other) {
+   private double sSort(int type, int index, int other) {
       if (type == 1){
          return staff.get(index).compareName(staff.get(other));
       }else{
@@ -386,6 +394,7 @@ public class Hospital {
    }
    
    //Writes all staff to file
+   /*
    public void exportStaff() {
       try{
          BufferedWriter write = new BufferedWriter(new FileWriter(file, true));
@@ -406,4 +415,6 @@ public class Hospital {
       }catch (IOException e){
       }
    }
+
+    */
 }
