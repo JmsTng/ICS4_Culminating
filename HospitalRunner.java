@@ -452,7 +452,7 @@ public class HospitalRunner {
                     salary = sc.nextDouble();
                     System.out.println("Overtime Salary: ");
                     overtimesalary = sc.nextDouble();
-                    System.out.println(hospital.addStaff(name, salary, overtimesalary));
+                    hospital.addStaff(name, salary, overtimesalary);
                     break;
 
                 case '3':
