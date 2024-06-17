@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class HospitalRunner {
@@ -70,54 +69,112 @@ public class HospitalRunner {
     public static void ward() {
         char userInput;
         int index;
+        boolean cont = true;
         Scanner sc = new Scanner (System.in);
         ArrayList<Ward> wards = hospital.getWard();
 
-        System.out.println("""
-                        
-                        
-                Ward Options:\s
-                0. Create a Ward
-                1. Delete a Ward
-                2. View Ward Information
-                3. Add Equipment to Storage
-                4. Move Equipment between Wards
-                4. Change operating cost
-                5. Exit Ward
-                6. Exit Program""");
-        do {
-            System.out.println("Enter a choice(0-4): ");
-            userInput = sc.nextLine().charAt(0);
-        } while (userInput <= '0' || userInput >= '6');
+        while (cont) {
+            System.out.println("""
+                            
+                            
+                    Ward Options:\s
+                    0. Create a Ward
+                    1. Delete a Ward
+                    2. View Ward Information
+                    3. Add Equipment to Storage
+                    4. Move Equipment between Wards
+                    5. Change operating cost
+                    6. Exit Ward
+                    7. Exit Program""");
+            do {
+                System.out.println("Enter a choice(0-6): ");
+                userInput = sc.nextLine().charAt(0);
+            } while (userInput < '0' || userInput > '7');
 
-        switch (userInput) {
-            case '0':
-               hospital.createWard();
-            case '1':
-               System.out.println("Index of ward to remove:");
-               index = sc.nextInt();
-               hospital.destroyWard(index);
-            case '2':
-               System.out.println("Storage:\n" + hospital.getStorage() + "\nOther Wards:");
-               for (int i = 0; i < wards.size(); i++){
-                  System.out.println(i + " " + wards.get(i));
-               }
-            case '3':
-               if (!hospital.assignEquipment()){
-                  System.out.println("Failed to complete command");
-               }
-            case '4':
-               
-            case '5':
-               
-            case '6':
+            switch (userInput) {
+
+                case '0':
+                    hospital.createWard();
+
+                case '1':
+                    System.out.println("Index of ward to remove:");
+                    index = sc.nextInt();
+                    hospital.destroyWard(index);
+
+                case '2':
+                    System.out.println("Storage:\n" + hospital.getStorage() + "\nOther Wards:");
+                    for (int i = 0; i < wards.size(); i++) {
+                        System.out.println(i + " " + wards.get(i));
+                    }
+
+                case '3':
+                    if (!hospital.assignEquipment()) {
+                        System.out.println("Failed to complete command");
+                    } else{
+                        System.out.println("Equipment successfully assigned");
+                    }
+
+                case '4':
+                    int num = 0, from, to, quantity;
+                    String name;
+                    ArrayList<Ward> applicable = new ArrayList<>();
+
+                    System.out.print("Equipment Name: ");
+                    name = sc.nextLine();
+                    System.out.print("Quantity: ");
+                    quantity = sc.nextInt();
+                    for (Ward ward: wards) {
+                        if (ward.getEquipment(name) != null) applicable.add(ward);
+                    }
+
+                    System.out.println("\nGET FROM:");
+                    for (Ward ward: applicable) {
+                        System.out.println(num + ". " + ward);
+                    }
+                    do {
+                        System.out.print("Enter a Choice: ");
+                        from = sc.nextInt();
+                    } while (from < 0 || from > applicable.size());
+
+
+                    num = 0;
+                    System.out.println("\nPUT IN:");
+                    for (Ward ward: wards){
+                        System.out.println(num + ". " + ward);
+                        num++;
+                    }
+                    do {
+                        System.out.print("Enter a Choice: ");
+                        to = sc.nextInt();
+                    } while (to < 0 || to > wards.size());
+
+                    applicable.get(from).
+
+
+                case '5':
+                    int num = 0;
+                    double cost;
+                    for (Ward ward: wards){
+                        System.out.println(num + ". " + ward);
+                        num++;
+                    }
+                    do {
+                        System.out.print("Enter a Choice: ");
+                        index = sc.nextInt();
+                    } while (index < 0 || index > wards.size());
+                    System.out.println("Old Operating Cost: " + wards.get(index).getBaseOperatingCost());
+                    System.out.print("New Operating cost: ");
+                    wards.get(index).setBaseOperatingCost(sc.nextDouble());
+
+                case '6':
                     cont = false;
 
-            case '7':
+                case '7':
                     cont = false;
                     exit = true;
 
 
+            }
         }
     }
 
@@ -135,6 +192,7 @@ public class HospitalRunner {
 
         ArrayList<Staff> staff;
         ArrayList<Patient> patients;
+        ArrayList<Ward> wards = hospital.getWard();
         Patient[] patientList;
         char userInput;
         boolean cont = true;
@@ -293,7 +351,7 @@ public class HospitalRunner {
 
                 case '7':
                     int selection = 0;
-                    for (Ward wards: hospital.)
+                    for (Ward ward: wards);
 
                 case '8':
                     cont = false;

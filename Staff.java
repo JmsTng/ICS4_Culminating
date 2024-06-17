@@ -200,6 +200,9 @@ public class Staff {
         return overtimeWorked == 0 && hoursWorked == 0;
     }
 
+    /**
+     * Allows the user to change specific information about the staff member.
+     * */
     public void updateInformation() {
         boolean done = false;
         char choice;

@@ -30,6 +30,14 @@ public class Ward{
       }
       return total;
    }
+
+   public double getBaseOperatingCost(){
+      return baseOperatingCost;
+   }
+
+   public void setBaseOperatingCost(double cost) {
+      baseOperatingCost = cost;
+   }
    
    public boolean addPatient(Patient p){
       //adds Patients up to cap
