@@ -271,9 +271,9 @@ public class Hospital {
    //Private method to run different staff compare methods
    private boolean sSearch(int searchType, String search, int index) {
       if (searchType == 1){
-         return staff.get(index).compareName(search);
+         return staff.get(index).matchName(search);
       }else{
-         return staff.get(index).compareEmployeeNumber(search);
+         return staff.get(index).matchEmployeeNumber(search);
       }
    }
    
