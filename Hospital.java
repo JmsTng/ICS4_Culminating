@@ -31,7 +31,9 @@ public class Hospital {
       this.budget = budget;
       this.numWards = 0;
       this.numPatients = 0;
-      this.numStaff = 0;
+      this.numStaff = 1;
+
+      staff.add(new Admin("admin", 0, 0));
       
       this.file = "staff.txt";
       this.storage = new Storage();
