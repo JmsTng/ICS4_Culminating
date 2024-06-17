@@ -26,9 +26,11 @@ public class Patient {
     private Ward ward; // The ward the patient is in
 
     // Constructor //
+
     /**
      * Constructs a Patient object.
      * Other than name, all other fields are automatically assigned at creation.
+     *
      * @param name the name of the Patient
      */
     public Patient(String name) {
@@ -40,8 +42,10 @@ public class Patient {
     }
 
     // Methods //
+
     /**
      * Retrieve the Patient's name.
+     *
      * @return the name of the Patient
      */
     public String getName() {
@@ -50,6 +54,7 @@ public class Patient {
 
     /**
      * Set the name field.
+     *
      * @param name the new name for the Patient
      */
     public void setName(String name) {
@@ -58,6 +63,7 @@ public class Patient {
 
     /**
      * Retrieve the Patient's ID.
+     *
      * @return the ID of the Patient
      */
     public String getId() {
@@ -66,6 +72,7 @@ public class Patient {
 
     /**
      * Retrieve the Patient's list of assigned Medical staff.
+     *
      * @return the staff roster for that Patient
      */
     public ArrayList<Medical> getMedicalPersonnel() {
@@ -74,6 +81,7 @@ public class Patient {
 
     /**
      * Retrieve the Patient's list of current symptoms.
+     *
      * @return the list of current Symptoms for that Patient
      */
     public ArrayList<Symptom> getSymptoms() {
@@ -82,6 +90,7 @@ public class Patient {
 
     /**
      * Retrieve the Ward the Patient is in.
+     *
      * @return the Ward the Patient is assigned to
      */
     public Ward getWard() {
@@ -90,6 +99,7 @@ public class Patient {
 
     /**
      * Retrieve the "severity level"/priority of a patient
+     *
      * @return the sum of the triage points of each Symptom
      */
     public int getTriage() {
@@ -104,6 +114,7 @@ public class Patient {
 
     /**
      * Retrieve the number of Severe Symptoms in the Symptom list.
+     *
      * @return number of Symptoms which are Severe
      */
     public int getNumSevere() {
@@ -118,8 +129,9 @@ public class Patient {
 
     /**
      * Add a Symptom with a description to the Patient's list of Symptoms.
-     * @param severity determine which level of severity
-     * @param name the name of the Symptom
+     *
+     * @param severity    determine which level of severity
+     * @param name        the name of the Symptom
      * @param description the description of the Symptom
      * @return whether the severity level is valid or not
      */
@@ -139,8 +151,9 @@ public class Patient {
 
     /**
      * Add a Symptom without a description to the Patient's list of Symptoms.
+     *
      * @param severity determine which level of severity
-     * @param name the name of the Symptom
+     * @param name     the name of the Symptom
      * @return whether the severity level is valid or not
      */
     public boolean addSymptom(int severity, String name) {
@@ -159,6 +172,7 @@ public class Patient {
 
     /**
      * Removes a Symptom from the Patient's Symptom list using a name.
+     *
      * @param name the name of the Symptom to remove
      * @return whether the Symptom was removed or not
      */
@@ -175,6 +189,7 @@ public class Patient {
 
     /**
      * Admits a Patient to a ward.
+     *
      * @param ward the Ward to be admitted to
      * @return whether the Patient was successfully admitted or not
      */
@@ -193,6 +208,7 @@ public class Patient {
 
     /**
      * Assigns a medical staff to the patient.
+     *
      * @param staff the medical staff to be assigned
      * @return whether the medical staff was successfully assigned or not
      */
@@ -207,6 +223,7 @@ public class Patient {
 
     /**
      * Removes a medical staff from the patient's assigned medical personnel.
+     *
      * @param staff the medical staff to be removed
      * @return whether the medical staff was successfully removed or not
      */
@@ -221,6 +238,7 @@ public class Patient {
 
     /**
      * Calculates the total cost for the patient's treatment.
+     *
      * @return the total cost
      */
     public double bill() {
@@ -234,6 +252,7 @@ public class Patient {
 
     /**
      * Checks if the given object is equal to this patient.
+     *
      * @param obj the object to be compared
      * @return whether the given object is equal to this patient or not
      */
@@ -245,6 +264,7 @@ public class Patient {
 
     /**
      * Checks if the given name matches the patient's name.
+     *
      * @param name the name to be checked
      * @return whether the given name matches the patient's name or not
      */
@@ -260,6 +280,7 @@ public class Patient {
 
     /**
      * Checks if the given id matches the patient's id.
+     *
      * @param id the id to be checked
      * @return whether the given id matches the patient's id or not
      */
@@ -269,6 +290,7 @@ public class Patient {
 
     /**
      * Compares this patient's name with the given patient's name.
+     *
      * @param patient the patient to be compared
      * @return the result of the comparison
      */
@@ -278,6 +300,7 @@ public class Patient {
 
     /**
      * Compares this patient's id with the given patient's id.
+     *
      * @param patient the patient to be compared
      * @return the result of the comparison
      */
@@ -287,6 +310,7 @@ public class Patient {
 
     /**
      * Searches for a symptom in the patient's symptom list using a name.
+     *
      * @param name the name of the symptom to search for
      * @return the index of the symptom in the list, or -1 if not found
      */

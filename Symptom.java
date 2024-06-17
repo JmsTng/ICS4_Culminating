@@ -14,6 +14,7 @@ public abstract class Symptom {
 
     /**
      * Constructs a Symptom object with a name.
+     *
      * @param name the name of the Symptom
      */
     public Symptom(String name) {
@@ -22,7 +23,8 @@ public abstract class Symptom {
 
     /**
      * Constructs a Symptom object with a name and description.
-     * @param name the name of the Symptom
+     *
+     * @param name        the name of the Symptom
      * @param description the description of the Symptom
      */
     public Symptom(String name, String description) {
@@ -32,6 +34,7 @@ public abstract class Symptom {
 
     /**
      * Retrieve the Symptom's name.
+     *
      * @return the name of the Symptom
      */
     public String getName() {
@@ -40,6 +43,7 @@ public abstract class Symptom {
 
     /**
      * Retrieve the Symptom's description.
+     *
      * @return the description of the Symptom
      */
     public String getDescription() {
@@ -49,6 +53,7 @@ public abstract class Symptom {
     /**
      * Retrieve the cost of the Symptom.
      * This method is abstract and must be implemented by subclasses.
+     *
      * @return the cost of the Symptom
      */
     public abstract double getCost();
@@ -56,6 +61,7 @@ public abstract class Symptom {
     /**
      * Retrieve the triage points of the Symptom.
      * This method is abstract and must be implemented by subclasses.
+     *
      * @return the triage points of the Symptom
      */
     public abstract int getTriage();
@@ -63,6 +69,7 @@ public abstract class Symptom {
     /**
      * Convert the Symptom to a String.
      * This method is abstract and must be implemented by subclasses.
+     *
      * @return the Symptom as a String
      */
     public abstract String toString(); // Added for file writing
@@ -78,6 +85,7 @@ class Mild extends Symptom {
 
     /**
      * Constructs a Mild Symptom object with a name.
+     *
      * @param name the name of the Symptom
      */
     public Mild(String name) {
@@ -86,7 +94,8 @@ class Mild extends Symptom {
 
     /**
      * Constructs a Mild Symptom object with a name and description.
-     * @param name the name of the Symptom
+     *
+     * @param name        the name of the Symptom
      * @param description the description of the Symptom
      */
     public Mild(String name, String description) {
@@ -95,6 +104,7 @@ class Mild extends Symptom {
 
     /**
      * Retrieve the cost of the Mild Symptom.
+     *
      * @return the cost of the Symptom
      */
     public double getCost() {
@@ -103,6 +113,7 @@ class Mild extends Symptom {
 
     /**
      * Retrieve the triage points of the Mild Symptom.
+     *
      * @return the triage points of the Symptom
      */
     public int getTriage() {
@@ -111,6 +122,7 @@ class Mild extends Symptom {
 
     /**
      * Convert the Mild Symptom to a String.
+     *
      * @return the Symptom as a String
      */
     public String toString() {
@@ -129,6 +141,7 @@ class Moderate extends Symptom {
 
     /**
      * Constructs a Moderate Symptom object with a name.
+     *
      * @param name the name of the Symptom
      */
     public Moderate(String name) {
@@ -137,7 +150,8 @@ class Moderate extends Symptom {
 
     /**
      * Constructs a Moderate Symptom object with a name and description.
-     * @param name the name of the Symptom
+     *
+     * @param name        the name of the Symptom
      * @param description the description of the Symptom
      */
     public Moderate(String name, String description) {
@@ -146,6 +160,7 @@ class Moderate extends Symptom {
 
     /**
      * Retrieve the cost of the Moderate Symptom.
+     *
      * @return the cost of the Symptom
      */
     public double getCost() {
@@ -154,6 +169,7 @@ class Moderate extends Symptom {
 
     /**
      * Retrieve the triage points of the Moderate Symptom.
+     *
      * @return the triage points of the Symptom
      */
     public int getTriage() {
@@ -162,6 +178,7 @@ class Moderate extends Symptom {
 
     /**
      * Convert the Moderate Symptom to a String.
+     *
      * @return the Symptom as a String
      */
     public String toString() {
@@ -180,6 +197,7 @@ class Severe extends Symptom {
 
     /**
      * Constructs a Severe Symptom object with a name.
+     *
      * @param name the name of the Symptom
      */
     public Severe(String name) {
@@ -188,7 +206,8 @@ class Severe extends Symptom {
 
     /**
      * Constructs a Severe Symptom object with a name and description.
-     * @param name the name of the Symptom
+     *
+     * @param name        the name of the Symptom
      * @param description the description of the Symptom
      */
     public Severe(String name, String description) {
@@ -197,6 +216,7 @@ class Severe extends Symptom {
 
     /**
      * Retrieve the cost of the Severe Symptom.
+     *
      * @return the cost of the Symptom
      */
     public double getCost() {
@@ -205,6 +225,7 @@ class Severe extends Symptom {
 
     /**
      * Retrieve the triage points of the Severe Symptom.
+     *
      * @return the triage points of the Symptom
      */
     public int getTriage() {
@@ -213,6 +234,7 @@ class Severe extends Symptom {
 
     /**
      * Convert the Severe Symptom to a String.
+     *
      * @return the Symptom as a String
      */
     public String toString() {

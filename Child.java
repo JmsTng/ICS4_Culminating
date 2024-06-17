@@ -14,9 +14,11 @@ public class Child extends Patient {
     public final int BASE_TRIAGE = 2; // The base triage level for a child patient
 
     // Constructor //
+
     /**
      * Constructs a Child object.
      * The name is passed to the superclass constructor.
+     *
      * @param name the name of the Child
      */
     public Child(String name) {
@@ -24,9 +26,11 @@ public class Child extends Patient {
     }
 
     // Methods //
+
     /**
      * Retrieve the "severity level"/priority of a child patient.
      * This is calculated as the sum of the triage points of each Symptom plus the base triage level for a child patient.
+     *
      * @return the triage level of the Child
      */
     public int getTriage() {
@@ -35,6 +39,7 @@ public class Child extends Patient {
 
     /**
      * Calculates the total cost for the patient's treatment.
+     *
      * @return the total cost
      */
     public double bill() {

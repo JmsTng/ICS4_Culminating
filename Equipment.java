@@ -4,7 +4,7 @@
  * in the ward, cost to maintain, and how many are being used in that ward.
  */
 public class Equipment {
-    
+
     /*FIELDS*/
     private String name;
     private int quantity;
@@ -58,11 +58,11 @@ public class Equipment {
 
     /**
      * Creates a new instance of equipment
-     * 
-     * @param w              Ward to be located in
-     * @param title          Name of the equipment
-     * @param quantity       Amount of this equipment in that ward
-     * @param maintainCost   The cost to maintain the equipment per unit
+     *
+     * @param w            Ward to be located in
+     * @param title        Name of the equipment
+     * @param quantity     Amount of this equipment in that ward
+     * @param maintainCost The cost to maintain the equipment per unit
      */
     public Equipment(Ward w, String title, int quantity, double maintainCost) {
         this.wardHoused = w;
@@ -78,7 +78,7 @@ public class Equipment {
      * Returns a string with information on the equipment including location, type,
      * quantity, amount in use, and maintenance cost.
      *
-     * @return   A string with information on the equipment
+     * @return A string with information on the equipment
      */
     public String toString() {
         return String.format("Ward: %s%nEquipment Name: %s%n Quantity: %d%nIn Use: %d%nCost to Maintain: %.2f", _getWardName(), name, this.quantity, inUse, maintenanceCost);
@@ -88,7 +88,7 @@ public class Equipment {
     /**
      * Returns the type of ward that the equipment is in.
      *
-     * @return   Type of ward
+     * @return Type of ward
      */
     private String _getWardName() {
         String toReturn;

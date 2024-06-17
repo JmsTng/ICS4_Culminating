@@ -20,8 +20,10 @@ public class MedicalHistory {
 
 
     // Constructor //
+
     /**
      * Constructs a MedicalHistory object.
+     *
      * @param patient the patient whose medical history this object will represent
      */
     public MedicalHistory(Patient patient) {
@@ -31,8 +33,10 @@ public class MedicalHistory {
 
 
     // Methods //
+
     /**
      * Saves a record of the patient's current state to their medical history.
+     *
      * @param date the date the record is being saved
      * @return whether the record was successfully saved or not
      */
@@ -47,12 +51,19 @@ public class MedicalHistory {
             fw.newLine();
 
             // Write the ward the patient is in
-            if (ward instanceof Emergency) { fw.write("Emergency"); }
-            else if (ward instanceof ICU) { fw.write("ICU"); }
-            else if (ward instanceof Oncology) { fw.write("Oncology"); }
-            else if (ward instanceof Paedology) { fw.write("Paedology"); }
-            else if (ward instanceof Ward) { fw.write("General"); }
-            else { fw.write("Not Yet Admitted"); }
+            if (ward instanceof Emergency) {
+                fw.write("Emergency");
+            } else if (ward instanceof ICU) {
+                fw.write("ICU");
+            } else if (ward instanceof Oncology) {
+                fw.write("Oncology");
+            } else if (ward instanceof Paedology) {
+                fw.write("Paedology");
+            } else if (ward instanceof Ward) {
+                fw.write("General");
+            } else {
+                fw.write("Not Yet Admitted");
+            }
             fw.newLine();
 
             // Output the number of symptoms, followed by the symptoms
